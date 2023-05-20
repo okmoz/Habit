@@ -7,22 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0224D8D72A1614B90067B559 /* ColorsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8D62A1614B90067B559 /* ColorsPickerView.swift */; };
+		0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8D82A1796490067B559 /* EditHabitView.swift */; };
+		0224D8DB2A17D6FF0067B559 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8DA2A17D6FF0067B559 /* HeaderView.swift */; };
 		02C3A8882A0FBA780044D090 /* HabitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8872A0FBA780044D090 /* HabitApp.swift */; };
 		02C3A88A2A0FBA780044D090 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8892A0FBA780044D090 /* ContentView.swift */; };
 		02C3A88C2A0FBA7A0044D090 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C3A88B2A0FBA7A0044D090 /* Assets.xcassets */; };
 		02C3A88F2A0FBA7A0044D090 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C3A88E2A0FBA7A0044D090 /* Preview Assets.xcassets */; };
-		02C3A8912A0FBA7A0044D090 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8902A0FBA7A0044D090 /* Persistence.swift */; };
+		02C3A8912A0FBA7A0044D090 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8902A0FBA7A0044D090 /* DataController.swift */; };
 		02C3A8942A0FBA7A0044D090 /* Habit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8922A0FBA7A0044D090 /* Habit.xcdatamodeld */; };
+		02C3A89B2A0FE57E0044D090 /* Habit+CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A89A2A0FE57E0044D090 /* Habit+CoreDataHelpers.swift */; };
+		02C3A89D2A1218A50044D090 /* HabitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A89C2A1218A50044D090 /* HabitRowView.swift */; };
+		02C3A8A62A125CA10044D090 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C3A8A52A125CA10044D090 /* Colors.xcassets */; };
+		02C3A8A82A1260220044D090 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8A72A1260220044D090 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0224D8D62A1614B90067B559 /* ColorsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerView.swift; sourceTree = "<group>"; };
+		0224D8D82A1796490067B559 /* EditHabitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
+		0224D8DA2A17D6FF0067B559 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		02C3A8842A0FBA780044D090 /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02C3A8872A0FBA780044D090 /* HabitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitApp.swift; sourceTree = "<group>"; };
 		02C3A8892A0FBA780044D090 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		02C3A88B2A0FBA7A0044D090 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02C3A88E2A0FBA7A0044D090 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		02C3A8902A0FBA7A0044D090 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		02C3A8902A0FBA7A0044D090 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		02C3A8932A0FBA7A0044D090 /* Habit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Habit.xcdatamodel; sourceTree = "<group>"; };
+		02C3A89A2A0FE57E0044D090 /* Habit+CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		02C3A89C2A1218A50044D090 /* HabitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRowView.swift; sourceTree = "<group>"; };
+		02C3A8A22A1220A90044D090 /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
+		02C3A8A52A125CA10044D090 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		02C3A8A72A1260220044D090 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		02C3A8A92A1261630044D090 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,9 +52,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0224D8D42A13A3390067B559 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				02C3A8902A0FBA7A0044D090 /* DataController.swift */,
+				02C3A89A2A0FE57E0044D090 /* Habit+CoreDataHelpers.swift */,
+				02C3A8A72A1260220044D090 /* Constants.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0224D8D52A13A3510067B559 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				02C3A8892A0FBA780044D090 /* ContentView.swift */,
+				0224D8DA2A17D6FF0067B559 /* HeaderView.swift */,
+				02C3A89C2A1218A50044D090 /* HabitRowView.swift */,
+				0224D8D82A1796490067B559 /* EditHabitView.swift */,
+				0224D8D62A1614B90067B559 /* ColorsPickerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		02C3A87B2A0FBA780044D090 = {
 			isa = PBXGroup;
 			children = (
+				02C3A8A22A1220A90044D090 /* Notes.md */,
+				02C3A8A92A1261630044D090 /* TODO.md */,
 				02C3A8862A0FBA780044D090 /* Habit */,
 				02C3A8852A0FBA780044D090 /* Products */,
 			);
@@ -56,10 +96,11 @@
 			isa = PBXGroup;
 			children = (
 				02C3A8872A0FBA780044D090 /* HabitApp.swift */,
-				02C3A8892A0FBA780044D090 /* ContentView.swift */,
-				02C3A88B2A0FBA7A0044D090 /* Assets.xcassets */,
-				02C3A8902A0FBA7A0044D090 /* Persistence.swift */,
+				0224D8D52A13A3510067B559 /* Views */,
+				0224D8D42A13A3390067B559 /* Models */,
 				02C3A8922A0FBA7A0044D090 /* Habit.xcdatamodeld */,
+				02C3A8A52A125CA10044D090 /* Colors.xcassets */,
+				02C3A88B2A0FBA7A0044D090 /* Assets.xcassets */,
 				02C3A88D2A0FBA7A0044D090 /* Preview Content */,
 			);
 			path = Habit;
@@ -131,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C3A8A62A125CA10044D090 /* Colors.xcassets in Resources */,
 				02C3A88F2A0FBA7A0044D090 /* Preview Assets.xcassets in Resources */,
 				02C3A88C2A0FBA7A0044D090 /* Assets.xcassets in Resources */,
 			);
@@ -143,10 +185,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02C3A8912A0FBA7A0044D090 /* Persistence.swift in Sources */,
+				0224D8D72A1614B90067B559 /* ColorsPickerView.swift in Sources */,
+				02C3A8912A0FBA7A0044D090 /* DataController.swift in Sources */,
+				0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */,
 				02C3A88A2A0FBA780044D090 /* ContentView.swift in Sources */,
+				02C3A89D2A1218A50044D090 /* HabitRowView.swift in Sources */,
+				0224D8DB2A17D6FF0067B559 /* HeaderView.swift in Sources */,
+				02C3A89B2A0FE57E0044D090 /* Habit+CoreDataHelpers.swift in Sources */,
 				02C3A8942A0FBA7A0044D090 /* Habit.xcdatamodeld in Sources */,
 				02C3A8882A0FBA780044D090 /* HabitApp.swift in Sources */,
+				02C3A8A82A1260220044D090 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

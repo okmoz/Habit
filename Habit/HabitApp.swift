@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct HabitApp: App {
-    let persistenceController = PersistenceController.shared
+    @StateObject var dataController = DataController()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environmentObject(dataController)
         }
     }
 }
