@@ -5,21 +5,9 @@
 //  Created by Nazarii Zomko on 15.05.2023.
 //
 
-import Foundation
+import SwiftUI
 
-enum Constants {
-    static let colors = [
-        "Yellow",
-        "Purple",
-        "Cyan",
-        "Pink",
-        "Red",
-        "Orange",
-        "Jasmine",
-        "Green",
-        "Blue"
-    ]
-    
+enum Constants {    
     static let motivationPrompts = [
          "Keep it Up! 🙌",
          "🙏 Feel the force of the Habit",
@@ -29,9 +17,10 @@ enum Constants {
          "Yes, you can! 💪"
     ]
     
-    static var randomColor: String {
-        Self.colors.randomElement() ?? "Blue"
-    }
-    
+    /// The size of the day of the week frame.
+    ///
+    /// It is used to ensure that the frame size of the checkmark (HabitRowView) and the frame size of the day of the week (HeaderView) remain consistent.
     static let dayOfTheWeekFrameSize: CGFloat = 32
 }
+
+

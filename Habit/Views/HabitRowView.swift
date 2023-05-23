@@ -17,94 +17,91 @@ struct HabitRowView: View {
     @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
-        VStack {
-            HStack {
-                Spacer()
-                HStack(spacing: 0) {
-                    ForEach(0..<5) {number in
-                        let daysAgo = abs(number - 4) // reverse order
-                        Button {
-                            toggleCheckmark(daysAgo: daysAgo)
-                        } label: {
-                            Image(isChecked(daysAgo: daysAgo) ? "checkmark" : "circle")
-                                .resizable()
-                                .padding(isChecked(daysAgo: daysAgo) ? 9 : 10)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: Constants.dayOfTheWeekFrameSize, height: Constants.dayOfTheWeekFrameSize)
-                                .contentShape(Rectangle())
-                        }
-                    }
+        ZStack(alignment: .top) {
+            Color("BoxColor")
+                .onTapGesture {
+                    isPresentingEditHabitView = true
                 }
-                .padding(.horizontal, 10)
-                .padding(.vertical)
-            }
-            Spacer()
-        }
-        .sheet(isPresented: $isPresentingEditHabitView) {
-            EditHabitView(habit: habit)
-        }
-        .background(
-            ZStack {
-                Color("BoxColor")
-                    .onTapGesture {
-                        isPresentingEditHabitView = true
-                    }
-                VStack {
+            VStack(spacing: -8) {
+                HStack() {
+                    percentageView
                     Spacer()
-                    HStack {
-                        ZStack {
-                            let percentage = habit.percentage
-                            
-                            HStack {
-                                Circle()
-                                    .stroke(style: StrokeStyle(lineWidth: CGFloat(percentage) * 6.4)) // workaround because setting size with frame does not work
-                                    .background(Circle().fill(Color(habit.color))) // workaround to stroke and fill at the same time
-                                    .frame(width: 30)
-                                    .foregroundColor(Color(habit.color))
-                                Spacer()
-                            }
-                            .offset(x: -6)
-                                
-                            HStack {
-                                Text("\(percentage)%")
-//                                    .frame(minWidth: 50, alignment: .leading)
-                                    .font(.system(size: 11))
-//                                    .border(.red)
-                                Spacer()
-                            }
-                        }
-                        .padding(.horizontal)
-                        
-
-
-                    }
-                    
-//                    .border(.red)
-                    Spacer()
-                    HStack {
-                        Text(habit.title)
-                            .font(.title3)
-                            .padding(.horizontal)
-//                            .blendMode(.difference)
+                    checkmarksView
+                        .padding(.trailing, 10)
+                }
+                .padding(.leading, 22)
+                .padding(.top, 12)
+                VStack() {
+                    HStack() {
+                        habitTitle
+                            .padding(.horizontal, 22)
+                            .allowsHitTesting(false)
                         Spacer()
                     }
-
-                    Spacer()
                 }
+                .frame(maxHeight: .infinity)
             }
-        )
-        
+        }
         .frame(height: 95)
         .clipShape(
             RoundedRectangle(cornerRadius: 10)
         )
-//        .padding(.horizontal)
-//        .padding(.vertical, 2)
-
+        .sheet(isPresented: $isPresentingEditHabitView) {
+            EditHabitView(habit: habit)
+        }
     }
     
-
+    var percentageView: some View {
+        Text("\(habit.percentage)%")
+            .font(.system(size: 11, weight: .medium))
+            .foregroundColor(.black)
+            .background(
+                Circle()
+                    .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.percentage) * 6.4)) // workaround because setting size with frame does not work
+                    // FIXME: find a way to calculate 100% that should expand the circle all the way
+                    .background(Circle().fill(Color(habit.color))) // workaround to stroke and fill at the same time
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(Color(habit.color))
+                    .offset(x: -0.5)
+                )
+//        ZStack {
+//            Circle()
+//                .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.percentage) * 6.4)) // workaround because setting size with frame does not work
+//                // FIXME: find a way to calculate 100% that should expand the circle all the way
+//                .background(Circle().fill(Color(habit.color))) // workaround to stroke and fill at the same time
+//                .frame(width: 30)
+//                .foregroundColor(Color(habit.color))
+//            Text("\(habit.percentage)%")
+//                .font(.system(size: 11))
+//                .foregroundColor(.black)
+//        }
+    }
     
+    var checkmarksView: some View {
+        HStack(spacing: 0) {
+            ForEach(0..<5) {number in
+                let daysAgo = abs(number - 4) // reverse order
+                Button {
+                    toggleCheckmark(daysAgo: daysAgo)
+                } label: {
+                    Image(isChecked(daysAgo: daysAgo) ? "checkmark" : "circle")
+                        .resizable()
+                        .foregroundColor(.primary) // For this to work, set rendering mode to Template inside Attributes Inspector for the image.
+                        .padding(isChecked(daysAgo: daysAgo) ? 9 : 10)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: Constants.dayOfTheWeekFrameSize, height: Constants.dayOfTheWeekFrameSize)
+                        .contentShape(Rectangle())
+                }
+            }
+        }
+    }
+    
+    var habitTitle: some View {
+        Text(habit.title)
+            .font(.custom("", size: 19, relativeTo: .title3))
+            .lineLimit(2)
+    }
+
     func toggleCheckmark(daysAgo: Int) {
         let today = Date.now
         let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
@@ -128,7 +125,7 @@ struct HabitRowView: View {
             }
         }
         return false
-    }
+    } 
 }
 
 struct HabitRowView_Previews: PreviewProvider {

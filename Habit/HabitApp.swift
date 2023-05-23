@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct HabitApp: App {
-    @StateObject var dataController = DataController()
+    @StateObject var dataController = DataController.shared
 
     var body: some Scene {
         WindowGroup {

@@ -13,7 +13,9 @@ struct EditHabitView: View {
     
     @State private var title: String = ""
     @State private var motivation: String = ""
-    @State private var color: String = Constants.randomColor
+    @State private var color: HabitColor = HabitColor.randomColor
+    
+    @State private var motivationPrompt = Constants.motivationPrompts.randomElement() ?? "Yes, you can! 💪"
     
     @State private var isPresentingColorsPicker = false
     
@@ -24,88 +26,33 @@ struct EditHabitView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
     @Environment(\.dismiss) var dismiss
     
+    init(habit: Habit?) {
+        self.habit = habit
+        
+        if let habit {
+            _title = State(wrappedValue: habit.title)
+            _motivation = State(wrappedValue: habit.motivation)
+            _color = State(wrappedValue: habit.color)
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Divider()
-                VStack {
-                    HStack {
-                        Text("NAME")
-                            .padding(.horizontal)
-                            .font(.caption.bold())
-                            .foregroundColor(.black)
-                        Spacer()
-                    }
-                    TextField("", text: $title, prompt: Text("Read a book, Meditate etc.").foregroundColor(.black.opacity(0.23)))
-                        .foregroundColor(.black)
-                        .focused($isNameTextFieldFocused)
-                        .padding(.horizontal)
-
-                }
-                .padding(.top, 40)
-                .padding(.bottom, 15)
-                .background(
-                    Color(color)
-                )
-                
-                VStack {
-                    HStack {
-                        Text("MOTIVATE YOURSELF")
-                            .padding(.horizontal)
-                            .font(.caption.bold())
-                        Spacer()
-                    }
-                    .padding(.top)
-                    TextField("", text: $motivation, prompt: Text(Constants.motivationPrompts.randomElement() ?? "Yes, you can! 💪"))
-                        .focused($isMotivationTextFieldFocused)
-                        .font(.callout)
-                        .padding(.horizontal)
-                }
-                
-                HStack {
-                    Text("Choose color")
-                    Spacer()
-                    Circle()
-                        .frame(height: 20)
-                        .foregroundColor(Color(color))
-                }
-                .padding()
-                .onTapGesture {
-                    isPresentingColorsPicker = true
-                }
+                customDivider
+                nameTextField // FIXME: rename
+                motivationTextField
+                colorPicker
                 Spacer()
             }
-            
             .toolbarBackground(Color(color), for: .navigationBar)
             .toolbarColorScheme(.light, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
-
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                    .foregroundColor(.black)
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        save()
-                        dismiss()
-                    }
-                    .foregroundColor(.black)
-                }
-                
+                cancelToolbarItem
+                saveToolbarItem
                 if habit != nil {
-                    ToolbarItem(placement: .bottomBar) {
-                        Button(role: .destructive) {
-                            delete()
-                            dismiss()
-                        } label: {
-                            Text("Delete Habit")
-                                .foregroundColor(.red)
-                        }
-
-                    }
+                    deleteToolbarItem
                 }
             }
             .navigationTitle(habit == nil ? "Add New Habit" : "Edit a Habit")
@@ -115,34 +62,121 @@ struct EditHabitView: View {
             ColorsPickerView(selectedColor: $color)
         }
         .onAppear() {
-            if let habit {
-                title = habit.title
-                motivation = habit.motivation
-                color = habit.color
-            } else {
+            if habit == nil {
                 isNameTextFieldFocused = true
             }
         }
     }
     
-    func save() {
-        if let habit {
-            habit.title = title
-            habit.motivation = motivation
-            habit.color = color
-        } else {
-            let newHabit = Habit.createNewEmptyHabit(context: managedObjectContext)
-            newHabit.title = title
-            newHabit.motivation = motivation
-            newHabit.color = color
+    var customDivider: some View {
+        Rectangle()
+            .frame(height: 0.1)
+            .foregroundColor(.black)
+    }
+    
+    var nameTextField: some View {
+        VStack {
+            HStack {
+                Text("NAME")
+                    .padding(.horizontal)
+                    .font(.caption.bold())
+                    .foregroundColor(.black)
+                Spacer()
+            }
+            TextField("", text: $title, prompt: Text("Read a book, Meditate etc.").foregroundColor(.black.opacity(0.23)))
+                .foregroundColor(.black)
+                .focused($isNameTextFieldFocused)
+                .padding(.horizontal)
+
         }
-        dataController.save()
+        .padding(.top, 40)
+        .padding(.bottom, 15)
+        .background(
+            Color(color)
+        )
+    }
+    
+    var motivationTextField: some View {
+        VStack {
+            HStack {
+                Text("MOTIVATE YOURSELF")
+                    .padding(.horizontal)
+                    .font(.caption.bold())
+                Spacer()
+            }
+            .padding(.top)
+            TextField("", text: $motivation, prompt: Text(motivationPrompt))
+                .focused($isMotivationTextFieldFocused)
+                .font(.callout)
+                .padding(.horizontal)
+        }
+    }
+    
+    var colorPicker: some View {
+        HStack {
+            Text("Choose color")
+            Spacer()
+            Circle()
+                .frame(height: 20)
+                .foregroundColor(Color(color))
+        }
+        .padding()
+        .onTapGesture {
+            isPresentingColorsPicker = true
+        }
+    }
+    
+    var cancelToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .cancellationAction) {
+            Button("Cancel") {
+                dismiss()
+            }
+            .foregroundColor(.black)
+        }
+    }
+    
+    var saveToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .confirmationAction) {
+            Button("Save") {
+                save()
+                dismiss()
+            }
+            .foregroundColor(.black)
+        }
+    }
+    
+    var deleteToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+            Button(role: .destructive) {
+                delete()
+                dismiss()
+            } label: {
+                Text("Delete Habit")
+                    .foregroundColor(.red)
+            }
+        }
+    }
+    
+    func save() {
+        withAnimation {
+            if let habit {
+                habit.title = title
+                habit.motivation = motivation
+                habit.color = color
+            } else {
+                // Initialization creates a new habit in current managedObjectContext
+                let _ = Habit(context: managedObjectContext, title: title, motivation: motivation, color: color)
+            }
+            dataController.save()
+        }
     }
     
     func delete() {
-        if let habit {
-            dataController.delete(habit)
-            dataController.save()
+        withAnimation {
+            if let habit {
+                dataController.delete(habit)
+                dataController.save()
+            }
         }
         dismiss()
     }

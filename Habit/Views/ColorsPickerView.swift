@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ColorsPickerView: View {
-    let colors = Constants.colors
+    let colors = HabitColor.allCases
     
     @Environment(\.dismiss) private var dismiss
 
-    @Binding var selectedColor: String
+    @Binding var selectedColor: HabitColor
 
     let gridItemLayout = [
         GridItem(.flexible()),
@@ -22,7 +22,7 @@ struct ColorsPickerView: View {
 
     var body: some View {
         LazyVGrid(columns: gridItemLayout) {
-            ForEach(colors, id: \.self) { color in
+            ForEach(colors) { color in
                 GeometryReader { geo in
                     Circle()
                         .foregroundColor(Color(color))
@@ -50,10 +50,10 @@ struct ColorsPickerView: View {
 
 struct ColorsPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorsPickerView(selectedColor: .constant("Blue"))
+        ColorsPickerView(selectedColor: .constant(.blue))
             .previewLayout(.sizeThatFits)
         
-        ColorsPickerView(selectedColor: .constant("Blue"))
+        ColorsPickerView(selectedColor: .constant(.blue))
                     .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
                     .previewDisplayName("iPhone 14 Pro Max")
     }
