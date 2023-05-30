@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import UIKit
 
 /// The `DataController` class is responsible for managing the Core Data stack and providing methods to interact with the data store.
 ///
@@ -48,6 +49,13 @@ class DataController: ObservableObject {
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
+            
+//            #if DEBUG
+//            if CommandLine.arguments.contains("enable-testing") {
+//                self.deleteAll()
+//                UIView.setAnimationsEnabled(false)
+//            }
+//            #endif
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
@@ -67,6 +75,12 @@ class DataController: ObservableObject {
     /// - Parameter object: The `NSManagedObject` to be deleted.
     func delete(_ object: NSManagedObject) {
         container.viewContext.delete(object)
+    }
+    
+    func deleteAll() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Habit.fetchRequest()
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        _ = try? container.viewContext.execute(batchDeleteRequest)
     }
     
     /// The preview instance of the `DataController`.
