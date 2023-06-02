@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Represents the color options for a habit.
+/// Describes the available color choices for a habit. Each case corresponds to a color with the exact same name in the HabitColors assets.
 enum HabitColor: String, CaseIterable, Identifiable {
     /// The unique identifier of the color.
     var id: Self { self }

@@ -64,7 +64,7 @@
 		02C3A8932A0FBA7A0044D090 /* Habit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Habit.xcdatamodel; sourceTree = "<group>"; };
 		02C3A89A2A0FE57E0044D090 /* Habit+CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		02C3A89C2A1218A50044D090 /* HabitRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRowView.swift; sourceTree = "<group>"; };
-		02C3A8A22A1220A90044D090 /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
+		02C3A8A22A1220A90044D090 /* Notes (Paul Hudson).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Notes (Paul Hudson).md"; sourceTree = "<group>"; };
 		02C3A8A52A125CA10044D090 /* HabitColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HabitColors.xcassets; sourceTree = "<group>"; };
 		02C3A8A72A1260220044D090 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		02C3A8A92A1261630044D090 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 		02C3A87B2A0FBA780044D090 = {
 			isa = PBXGroup;
 			children = (
-				02C3A8A22A1220A90044D090 /* Notes.md */,
+				02C3A8A22A1220A90044D090 /* Notes (Paul Hudson).md */,
 				0259820E2A2A16E80085D29E /* Notes (Sean Allen).md */,
 				02C6B7CB2A1BBA7F003FAC61 /* Stashed Snippets.md */,
 				02C3A8A92A1261630044D090 /* TODO.md */,

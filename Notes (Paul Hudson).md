@@ -1,4 +1,4 @@
-#  Notes
+#  Notes (Paul Hudson)
 
 ## Documenting our code
 3 kinds of code comments form Paul:
@@ -100,3 +100,15 @@ If you want great test coverage, you have to write UI tests as well.
 
 ## MVVM
 MVVM is a small refinement of MVC, the older, classic way of building applications. It's designed to store all the state of your app apart from the UI.
+
+MVVM is NOT required for SwiftUI.
+
+It's entirely possible that the best way to implement MVVM into your app is not to implement MVVM at all.
+
+MVVM is easier to test because our logic is removed from view. And also, CoreData becomes an implementation detail for these views. Another thing we don't care from the view's perspective. We could replace our CoreData with something else and it wouldn't matter. The views wouldn't care.
+
+Why NOT to use MVVM in this SwiftUI project: 
+1. "There was a time when the ViewModel approach was the mainstream in mobile app development with MVVM. In a world with declarative UI such as SwiftUI, the thinking needs to change. ViewModel was originally introduced for the purpose of Binding the state to the View and reflecting it to Reactive, but since the declarative UI includes that functionality, ViewModel is unnecessary."
+2. "For small to medium scale applications, MV (Model and View) is all you need."
+3. "In the era of declarative UI, what we really want in large-scale app development is MVI (unidirectional data flow), Flux (The Composable Architecture), and Store/Provider patterns."
+Source: https://medium.com/@karamage/stop-using-mvvm-with-swiftui-2c46eb2cc8dc
