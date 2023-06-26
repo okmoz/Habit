@@ -78,3 +78,7 @@
         
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+
+
+//                                    let reverseNumber = abs(number - itemCount) + 1
+//                                    let number = (rows * column) + row + 1
