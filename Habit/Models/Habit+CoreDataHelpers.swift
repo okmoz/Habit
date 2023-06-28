@@ -105,8 +105,8 @@ extension Habit {
         habit.title_ = "Example Habit"
         habit.motivation_ = "Motivation text"
         habit.creationDate_ = Date()
-        habit.color_ = "Blue" // TODO: set random color
-        habit.checkedDates_ = []
+        habit.color_ = "yellow" // TODO: set random color
+        habit.checkedDates_ = [Date.now]
         
         do {
             try viewContext.save()
@@ -116,5 +116,20 @@ extension Habit {
         }
         
         return habit
+    }
+    
+    static func getRandomDates(maxDaysBack: Int, chanceFrom0To100: Int = 60) -> [Date] {
+        var dates: [Date] = []
+        let today = Date.now
+        
+        for daysBack in 0..<maxDaysBack {
+            let shouldAddDate = Int.random(in: 1...100) <= chanceFrom0To100 // returns true with a chance of ..%
+            
+            if shouldAddDate {
+                let todayMinusDaysBack = Calendar.current.date(byAdding: .day, value: -daysBack, to: today)!
+                dates.append(todayMinusDaysBack)
+            }
+        }
+        return dates
     }
 }

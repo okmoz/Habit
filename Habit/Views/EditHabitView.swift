@@ -40,9 +40,11 @@ struct EditHabitView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 customDivider
-                nameTextField // FIXME: rename
+                nameTextField
                 motivationTextField
                 colorPicker
+                ChartView(dates: habit?.checkedDates ?? [], color: color)
+                    .padding()
                 Spacer()
             }
             .toolbarBackground(Color(color), for: .navigationBar)
@@ -186,8 +188,11 @@ struct EditHabitView: View {
 
 
 struct HabitView_Previews: PreviewProvider {
+    // For some reason CoreData doesn't create habit example in Xcode preview. DataController(inMemory) is initialized properly only on a Simulator.
+    static var habit = Habit.example
+    
     static var previews: some View {
-        EditHabitView(habit: Habit.example)
+        EditHabitView(habit: habit)
     }
 }
 

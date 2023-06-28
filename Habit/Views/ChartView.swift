@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ChartView: View {
-    var columns = 26
     var rows = 7
-    let spacing: CGFloat = 2
+    var columns = 20
+    var spacing: CGFloat = 2
     
-    @State private var dates: [Date] = []
+    var dates: [Date]
+    
+    var color: HabitColor?
+    
+// TODO: go back to original reversed; for the first cell check if day starts on monday, if no, shift "starting date"; then for each cell check if day is after today, and if it is, add clear color
     
     var body: some View {
         GeometryReader { geo in
@@ -24,26 +28,25 @@ struct ChartView: View {
                             let isDateChecked = isChecked(daysAgo: number)
                             
                             RoundedRectangle(cornerRadius: 2)
-                                .fill(isDateChecked ? .green : .gray.opacity(0.1))
+                                .strokeBorder(.gray.opacity(0.5), lineWidth: 0.08)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .fill(isDateChecked ? Color(color ?? .green) : .gray.opacity(0.1))
+                                )
                                 .aspectRatio(1.0, contentMode: .fit)
                                 .overlay {
-                                    Text("\(getDayOfMonth(daysAgo: number))")
-                                        .font(.system(size: 6))
-//                                    Text("\(number)")
+//                                    Text("\(getDayOfMonth(daysAgo: number))")
 //                                        .font(.system(size: 6))
+                                    Text("\(number)")
+                                        .font(.system(size: 6))
                                 }
                         }
                     }
                 }
             }
-            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+//            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
         }
         .padding()
-        .onAppear() {
-            dates = getRandomDates(maxDaysBack: 180)
-//            dates = [Date.now]
-            print(dates)
-        }
     }
     
     func getDayOfMonth(daysAgo: Int) -> String {
@@ -79,25 +82,11 @@ struct ChartView: View {
         }
         return false
     }
-    
-    func getRandomDates(maxDaysBack: Int) -> [Date] {
-        var dates: [Date] = []
-        let today = Date.now
-        
-        for daysBack in 0..<maxDaysBack {
-            let shouldAddDate = Int.random(in: 1...100) <= 25 // returns true with a chance of 75%
-            
-            if shouldAddDate {
-                let todayMinusDaysBack = Calendar.current.date(byAdding: .day, value: -daysBack, to: today)!
-                dates.append(todayMinusDaysBack)
-            }
-        }
-        return dates
-    }
 }
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView()
+        let habit = Habit.example
+        ChartView(dates: habit.checkedDates, color: habit.color)
     }
 }
