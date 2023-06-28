@@ -25,6 +25,7 @@
 		02C3A8A62A125CA10044D090 /* HabitColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C3A8A52A125CA10044D090 /* HabitColors.xcassets */; };
 		02C3A8A82A1260220044D090 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8A72A1260220044D090 /* Constants.swift */; };
 		02C6B7CA2A1B8B67003FAC61 /* HabitColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6B7C92A1B8B67003FAC61 /* HabitColor.swift */; };
+		02DAD6C02A4C42FC00F2DA14 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD6BF2A4C42FC00F2DA14 /* Date+Ext.swift */; };
 		02EC2FB22A1CECF00004DA4B /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC2FB12A1CECF00004DA4B /* HabitTests.swift */; };
 		02EC2FB92A1CEEE50004DA4B /* AssetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC2FB82A1CEEE50004DA4B /* AssetTest.swift */; };
 		02EC2FBB2A20BA4E0004DA4B /* HabitItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC2FBA2A20BA4E0004DA4B /* HabitItemTests.swift */; };
@@ -72,6 +73,7 @@
 		02C3A8A92A1261630044D090 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		02C6B7C92A1B8B67003FAC61 /* HabitColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitColor.swift; sourceTree = "<group>"; };
 		02C6B7CB2A1BBA7F003FAC61 /* Stashed Snippets.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Stashed Snippets.md"; sourceTree = "<group>"; };
+		02DAD6BF2A4C42FC00F2DA14 /* Date+Ext.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; tabWidth = 4; };
 		02EC2FAA2A1CEA410004DA4B /* Habit.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Habit.xctestplan; sourceTree = "<group>"; };
 		02EC2FAF2A1CECF00004DA4B /* HabitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02EC2FB12A1CECF00004DA4B /* HabitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTests.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		02C6B7CD2A1CE397003FAC61 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				02DAD6BF2A4C42FC00F2DA14 /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 			files = (
 				0224D8D72A1614B90067B559 /* ColorsPickerView.swift in Sources */,
 				02C6B7CA2A1B8B67003FAC61 /* HabitColor.swift in Sources */,
+				02DAD6C02A4C42FC00F2DA14 /* Date+Ext.swift in Sources */,
 				02C3A8912A0FBA7A0044D090 /* DataController.swift in Sources */,
 				0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */,
 				02C3A88A2A0FBA780044D090 /* ContentView.swift in Sources */,

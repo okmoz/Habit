@@ -82,3 +82,9 @@
 
 //                                    let reverseNumber = abs(number - itemCount) + 1
 //                                    let number = (rows * column) + row + 1
+
+        let cellCount = columns * rows
+        let maxNumberInCol = rows * column + rows
+        let reversedMaxNumberInCol = abs(maxNumberInCol - cellCount) + rows
+        let reversedRowNumber = abs(rows - row)
+        let number = reversedMaxNumberInCol - reversedRowNumber

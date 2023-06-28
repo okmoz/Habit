@@ -106,7 +106,7 @@ extension Habit {
         habit.motivation_ = "Motivation text"
         habit.creationDate_ = Date()
         habit.color_ = "yellow" // TODO: set random color
-        habit.checkedDates_ = [Date.now]
+        habit.checkedDates_ = getRandomDates(maxDaysBack: 7*20)
         
         do {
             try viewContext.save()
