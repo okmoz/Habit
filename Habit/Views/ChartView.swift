@@ -8,60 +8,68 @@
 import SwiftUI
 
 struct ChartView: View {
-    var dates: [Date]
-    var color: HabitColor?
-
-    var rows: Int
-    var columns: Int
-    var spacing: CGFloat
-    
-    private var numberOfDaysToShiftBy = 0
-    
-    init(dates: [Date], color: HabitColor? = nil, columns: Int = 20, spacing: CGFloat = 3) {
-        self.dates = dates
-        self.color = color
-        self.rows = 7
-        self.columns = columns
-        self.spacing = spacing
-        
-        self.numberOfDaysToShiftBy = getNumberOfDaysToShiftBy()
+    enum DisplayModes: String, Identifiable, CaseIterable {
+        var id: Self { self }
+        case threeMonths = "Three months"
+        case sixMonths = "Six months"
+        case twelveMonths = "One year"
     }
     
+    var dates: [Date]
+    var color: HabitColor = .green
+    
+    @AppStorage("displayMode") private var displayMode: DisplayModes = .sixMonths
+
+    private var rows: Int { getNumberOfRows() }
+    private var columns: Int { getNumberOfColumns() }
+    private var spacing: CGFloat { getSpacing() }
+    private var cornerRadius: CGFloat { getCornerRadius() }
+    private var strokeWidth: CGFloat { getStrokeWidth() }
+    
     var body: some View {
-        HStack(spacing: spacing) {
-            ForEach(0..<columns, id: \.self) { column in
-                VStack(spacing: spacing) {
-                    ForEach(0..<rows, id: \.self) { row in
-                        let number = getNumberForCell(column: column, row: row)
-                        let color = getColorForCell(number: number)
-                        
-                        RoundedRectangle(cornerRadius: 3)
-                            .strokeBorder(.gray.opacity(0), lineWidth: 0.08) // TODO: fix stroke on emty cells
-                            .background(
-                                RoundedRectangle(cornerRadius: 3)
-                                    .fill(color)
-                            )
-                            .aspectRatio(1.0, contentMode: .fit)
-                            .overlay {
-//                                Text("\(getDayOfMonth(daysAgo: number))")
-//                                    .font(.system(size: 6))
-//                                Text("\(number)")
-//                                    .font(.system(size: 10))
-                            }
+        VStack {
+            HStack {
+                Picker("Display mode", selection: $displayMode) {
+                    ForEach(DisplayModes.allCases) {
+                        Text($0.rawValue)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+            HStack(spacing: spacing) {
+                ForEach(0..<columns, id: \.self) { column in
+                    VStack(spacing: spacing) {
+                        ForEach(0..<rows, id: \.self) { row in
+                            let index = getIndexForCell(column: column, row: row)
+                                                    
+                            let daysShiftOffset = calculateDaysShiftOffset()
+                            let shiftedIndex = index - daysShiftOffset
+                            
+                            let color = getColorForCell(index: shiftedIndex)
+                            
+                            RoundedRectangle(cornerRadius: cornerRadius)
+                                .fill(color.fill)
+//                                .overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(color.stroke, lineWidth: strokeWidth))
+                                .aspectRatio(1.0, contentMode: .fit)
+                        }
                     }
                 }
             }
+    //        .drawingGroup()
         }
     }
     
-    func getColorForCell(number: Int) -> Color {
-        let date = getDateForCell(numberOfDaysAgo: number)
+    func getColorForCell(index: Int) -> (fill: Color, stroke: Color) {
+        let date = getDateForCell(numberOfDaysAgo: index)
         
         if isDayAfterToday(date: date) {
-            return .clear
+            return (fill: .clear, stroke: .clear)
         } else {
-            let isDateChecked = isDateChecked(date)
-            return isDateChecked ? Color(color ?? .green) : .gray.opacity(0.1)
+            if isDateChecked(date) {
+                return (fill: Color(color), stroke: .cellStrokeColor)
+            } else {
+                return (fill: .cellFillColor, stroke: .cellStrokeColor)
+            }
         }
     }
     
@@ -76,42 +84,78 @@ struct ChartView: View {
         return todayMinusDaysAgo
     }
     
-    /// Returns the delta of days between sunday and today.
-    func getNumberOfDaysToShiftBy() -> Int {
+    /// Returns the delta of days between sunday and today. Cells will be shifted by the offset amount so that the first row of cells will always begin on Sunday.
+    func calculateDaysShiftOffset() -> Int {
+        // If number of rows is less than 7 (like 7 days of the week), shifting days would not make sense because columns would not be comprised of weeks.
+        guard rows == 7 else { return 0 }
+        
         let today = Date.today()
         let nextSunday = today.next(.sunday)
+        let offset = nextSunday.days(from: today)
         
-        return nextSunday.days(from: today)
+        return offset
     }
     
-    /// Reverses the numbers from left to right so that number '0' now starts at the bottom right instead of top left. It also shifts all numbers so that the first row of cells will always begin on Sunday.
-    func getNumberForCell(column: Int, row: Int) -> Int {
-        let number = (rows * column) + row
+    /// Reverses the numbers from left to right so that index '0' now starts at the bottom right instead of top left.
+    func getIndexForCell(column: Int, row: Int) -> Int {
+        let index = (rows * column) + row
         let cellCount = columns * rows
-        let reverseNumber = abs(number - cellCount) - 1
-        let reverseNumberShifted = reverseNumber - numberOfDaysToShiftBy
-        return reverseNumberShifted
+        let reverseIndex = abs(index - cellCount) - 1
+        return reverseIndex
     }
-    
-    func getDayOfMonth(daysAgo: Int) -> String {
-        let today = Date.now
-        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, d"
-        let dayNumber = dateFormatter.string(from: todayMinusDaysAgo)
-        
-        return dayNumber
-    }
-    
-    // TODO: make functional?
+
     func isDateChecked(_ habitDate: Date) -> Bool {
-        for date in dates {
-            if Calendar.current.isDate(date, inSameDayAs: habitDate) {
-                return true
-            }
+        return dates.contains { date in
+            Calendar.current.isDate(date, inSameDayAs: habitDate)
         }
-        return false
+    }
+    
+    func getNumberOfRows() -> Int {
+        return displayMode == .threeMonths ? 5 : 7
+    }
+    
+    func getNumberOfColumns() -> Int {
+        switch displayMode {
+        case .threeMonths:
+            return Int(365/4/rows)
+        case .sixMonths:
+            return Int(365/2/rows)
+        case .twelveMonths:
+            return Int(365/rows)
+        }
+    }
+    
+    func getSpacing() -> CGFloat {
+        switch displayMode {
+        case .threeMonths:
+            return 3
+        case .sixMonths:
+            return 2.5
+        case .twelveMonths:
+            return 1
+        }
+    }
+    
+    func getCornerRadius() -> CGFloat {
+        switch displayMode {
+        case .threeMonths:
+            return 4
+        case .sixMonths:
+            return 2
+        case .twelveMonths:
+            return 2
+        }
+    }
+    
+    func getStrokeWidth() -> CGFloat {
+        switch displayMode {
+        case .threeMonths:
+            return 1.2
+        case .sixMonths:
+            return 1
+        case .twelveMonths:
+            return 0.2
+        }
     }
 }
 

@@ -18,7 +18,7 @@ struct HabitRowView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            Color("BoxColor")
+            Color.habitBackgroundColor
                 .onTapGesture {
                     isPresentingEditHabitView = true
                 }

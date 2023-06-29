@@ -80,6 +80,8 @@
     }
 
 
+
+CHARTVIEW:
 //                                    let reverseNumber = abs(number - itemCount) + 1
 //                                    let number = (rows * column) + row + 1
 
@@ -88,3 +90,24 @@
         let reversedMaxNumberInCol = abs(maxNumberInCol - cellCount) + rows
         let reversedRowNumber = abs(rows - row)
         let number = reversedMaxNumberInCol - reversedRowNumber
+
+
+                            .overlay {
+//                                Text("\(getDayOfMonth(daysAgo: index))")
+//                                    .font(.system(size: 6))
+//                                Text("\(index)")
+//                                    .font(.system(size: 10))
+                            }
+
+
+
+    func getDayOfMonth(daysAgo: Int) -> String {
+        let today = Date.now
+        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E, d"
+        let dayNumber = dateFormatter.string(from: todayMinusDaysAgo)
+        
+        return dayNumber
+    }
