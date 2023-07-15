@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02089EBD2A626390003DB055 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02089EBC2A626390003DB055 /* CustomErrors.swift */; };
 		020A5DB02A4887100062C283 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A5DAF2A4887100062C283 /* ChartView.swift */; };
 		0224D8D72A1614B90067B559 /* ColorsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8D62A1614B90067B559 /* ColorsPickerView.swift */; };
 		0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8D82A1796490067B559 /* EditHabitView.swift */; };
@@ -31,6 +32,8 @@
 		02EC2FB92A1CEEE50004DA4B /* AssetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC2FB82A1CEEE50004DA4B /* AssetTest.swift */; };
 		02EC2FBB2A20BA4E0004DA4B /* HabitItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC2FBA2A20BA4E0004DA4B /* HabitItemTests.swift */; };
 		02EC2FBF2A20E5730004DA4B /* DevelopmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC2FBE2A20E5730004DA4B /* DevelopmentTests.swift */; };
+		02FD36682A4F32A70023AB38 /* ShortcutsHabitEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FD36672A4F32A70023AB38 /* ShortcutsHabitEntity.swift */; };
+		02FD366A2A4F33080023AB38 /* CompleteHabitIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FD36692A4F33080023AB38 /* CompleteHabitIntent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02089EBC2A626390003DB055 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 		020A5DAF2A4887100062C283 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		0224D8D62A1614B90067B559 /* ColorsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerView.swift; sourceTree = "<group>"; };
 		0224D8D82A1796490067B559 /* EditHabitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 		02EC2FB82A1CEEE50004DA4B /* AssetTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTest.swift; sourceTree = "<group>"; };
 		02EC2FBA2A20BA4E0004DA4B /* HabitItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitItemTests.swift; sourceTree = "<group>"; };
 		02EC2FBE2A20E5730004DA4B /* DevelopmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentTests.swift; sourceTree = "<group>"; };
+		02FD36672A4F32A70023AB38 /* ShortcutsHabitEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutsHabitEntity.swift; sourceTree = "<group>"; };
+		02FD36692A4F33080023AB38 /* CompleteHabitIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteHabitIntent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,10 +150,10 @@
 		02C3A87B2A0FBA780044D090 = {
 			isa = PBXGroup;
 			children = (
+				02C3A8A92A1261630044D090 /* TODO.md */,
 				02C3A8A22A1220A90044D090 /* Notes (Paul Hudson).md */,
 				0259820E2A2A16E80085D29E /* Notes (Sean Allen).md */,
 				02C6B7CB2A1BBA7F003FAC61 /* Stashed Snippets.md */,
-				02C3A8A92A1261630044D090 /* TODO.md */,
 				02C3A8862A0FBA780044D090 /* Habit */,
 				02EC2FB02A1CECF00004DA4B /* HabitTests */,
 				026E1CA92A24B58900B882C1 /* HabitUITests */,
@@ -174,6 +180,7 @@
 				02C6B7CD2A1CE397003FAC61 /* Extensions */,
 				02C6B7CF2A1CE3C1003FAC61 /* Configuration */,
 				02C6B7CE2A1CE39E003FAC61 /* Localization */,
+				02FD36662A4F32590023AB38 /* Shortcuts */,
 				02C3A8872A0FBA780044D090 /* HabitApp.swift */,
 				02C3A8A52A125CA10044D090 /* HabitColors.xcassets */,
 				02C3A88B2A0FBA7A0044D090 /* Assets.xcassets */,
@@ -232,6 +239,16 @@
 				02EC2FBE2A20E5730004DA4B /* DevelopmentTests.swift */,
 			);
 			path = HabitTests;
+			sourceTree = "<group>";
+		};
+		02FD36662A4F32590023AB38 /* Shortcuts */ = {
+			isa = PBXGroup;
+			children = (
+				02FD36672A4F32A70023AB38 /* ShortcutsHabitEntity.swift */,
+				02FD36692A4F33080023AB38 /* CompleteHabitIntent.swift */,
+				02089EBC2A626390003DB055 /* CustomErrors.swift */,
+			);
+			path = Shortcuts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,8 +396,11 @@
 				02DAD6C22A4D772600F2DA14 /* Color+Ext.swift in Sources */,
 				02C6B7CA2A1B8B67003FAC61 /* HabitColor.swift in Sources */,
 				02DAD6C02A4C42FC00F2DA14 /* Date+Ext.swift in Sources */,
+				02FD36682A4F32A70023AB38 /* ShortcutsHabitEntity.swift in Sources */,
 				02C3A8912A0FBA7A0044D090 /* DataController.swift in Sources */,
 				0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */,
+				02089EBD2A626390003DB055 /* CustomErrors.swift in Sources */,
+				02FD366A2A4F33080023AB38 /* CompleteHabitIntent.swift in Sources */,
 				02C3A88A2A0FBA780044D090 /* ContentView.swift in Sources */,
 				02C3A89D2A1218A50044D090 /* HabitRowView.swift in Sources */,
 				0224D8DB2A17D6FF0067B559 /* HeaderView.swift in Sources */,

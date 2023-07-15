@@ -17,7 +17,7 @@ import CoreData
 extension Habit {
     /// Initializes a new `Habit` instance with the given parameters.
     ///
-    /// This convenience initializer allows you to create a new `Habit` instance with the specified properties, and automatically sets the creation date to the current date and the checked dates to an empty array.
+    /// This convenience initializer allows you to create a new `Habit` instance with the specified properties, and automatically sets the creation date to the current date and the completed dates to an empty array.
     ///
     /// - Parameters:
     ///   - context: The managed object context in which the new `Habit` instance will be inserted.
@@ -26,11 +26,27 @@ extension Habit {
     ///   - color: The color associated with the habit.
     convenience init(context: NSManagedObjectContext, title: String, motivation: String, color: HabitColor) {
         self.init(context: context)
+        self.id = UUID()
         self.title = title
         self.motivation = motivation
         self.color = color
         self.creationDate = Date()
-        self.checkedDates = []
+        self.completedDates = []
+    }
+    
+    public var id: UUID {
+        get {
+            if let id_ {
+                return id_
+            } else {
+                // Creates a new UUID for a habit that previously didn't have one. For migration and safety purposes. -Is this a good idea? Saving moc when accessing an attribute might not be good.
+                id_ = UUID()
+                try? self.managedObjectContext?.save()
+                print("Created a UUID for habit '\(title)' because it was 'nil'.")
+                return id_ ?? UUID()
+            }
+        }
+        set { id_ = newValue }
     }
     
     /// The title of the habit.
@@ -65,33 +81,19 @@ extension Habit {
         set { color_ = newValue.rawValue }
     }
 
-    /// The dates when the habit was checked or completed.
+    /// The dates when the habit was completed.
     ///
-    /// Provides a convenient interface for accessing and setting the habit's checked dates. If the underlying storage property (`checkedDates_`) is `nil`, an empty array is returned when accessing the property.
-    var checkedDates: [Date] {
-        get { checkedDates_ ?? [] }
-        set { checkedDates_ = newValue }
+    /// Provides a convenient interface for accessing and setting the habit's completed dates. If the underlying storage property (`completedDates_`) is `nil`, an empty array is returned when accessing the property.
+    var completedDates: [Date] {
+        get { completedDates_ ?? [] }
+        set { completedDates_ = newValue }
     }
 
     /// The percentage of completion for the habit.
     ///
-    /// Represents the completion percentage of the habit based on the number of checked dates. The calculation is performed using the formula:
+    /// Represents the completion percentage of the habit based on the number of completed dates. The calculation is performed using the formula:
     var percentage: Int {
-        checkedDates.count * 5 // temporary
-    }
-    
-    /// Adds a date to the list of checked dates for the habit.
-    ///
-    /// - Parameter date: The date to add.
-    func addDate(_ date: Date) {
-        checkedDates.append(date)
-    }
-    
-    /// Removes a date from the list of checked dates for the habit.
-    ///
-    /// - Parameter date: The date to remove.
-    func removeDate(_ date: Date) {
-        checkedDates.removeAll(where: { Calendar.current.isDate($0, inSameDayAs: date) } )
+        completedDates.count * 5 // temporary
     }
     
     /// A preconfigured example `Habit` instance for testing or previewing purposes.
@@ -101,12 +103,8 @@ extension Habit {
         let dataController = DataController(inMemory: true)
         let viewContext = dataController.container.viewContext
         
-        let habit = Habit(context: viewContext)
-        habit.title_ = "Example Habit"
-        habit.motivation_ = "Motivation text"
-        habit.creationDate_ = Date()
-        habit.color_ = "yellow" // TODO: set random color
-        habit.checkedDates_ = getRandomDates(maxDaysBack: 7*26)
+        let habit = Habit(context: viewContext, title: "Example Habit", motivation: "Motivation text", color: HabitColor.randomColor)
+        habit.completedDates_ = Constants.getRandomDates(maxDaysBack: 7*26)
         
         do {
             try viewContext.save()
@@ -118,18 +116,15 @@ extension Habit {
         return habit
     }
     
-    static func getRandomDates(maxDaysBack: Int, chanceFrom0To100: Int = 60) -> [Date] {
-        var dates: [Date] = []
+    func isCompleted(daysAgo: Int) -> Bool {
         let today = Date.now
+        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
         
-        for daysBack in 0..<maxDaysBack {
-            let shouldAddDate = Int.random(in: 1...100) <= chanceFrom0To100 // returns true with a chance of ..%
-            
-            if shouldAddDate {
-                let todayMinusDaysBack = Calendar.current.date(byAdding: .day, value: -daysBack, to: today)!
-                dates.append(todayMinusDaysBack)
+        for completedDate in completedDates {
+            if Calendar.current.isDate(completedDate, inSameDayAs: todayMinusDaysAgo) {
+                return true
             }
         }
-        return dates
+        return false
     }
 }
