@@ -65,7 +65,7 @@ struct ChartView: View {
         if isDayAfterToday(date: date) {
             return (fill: .clear, stroke: .clear)
         } else {
-            if isDateChecked(date) {
+            if isDateCompleted(date) {
                 return (fill: Color(color), stroke: .cellStrokeColor)
             } else {
                 return (fill: .cellFillColor, stroke: .cellStrokeColor)
@@ -104,7 +104,7 @@ struct ChartView: View {
         return reverseIndex
     }
 
-    func isDateChecked(_ habitDate: Date) -> Bool {
+    func isDateCompleted(_ habitDate: Date) -> Bool {
         return dates.contains { date in
             Calendar.current.isDate(date, inSameDayAs: habitDate)
         }
@@ -162,6 +162,6 @@ struct ChartView: View {
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
         let habit = Habit.example
-        ChartView(dates: habit.checkedDates, color: habit.color)
+        ChartView(dates: habit.completedDates, color: habit.color)
     }
 }

@@ -111,4 +111,5 @@ Why NOT to use MVVM in this SwiftUI project:
 1. "There was a time when the ViewModel approach was the mainstream in mobile app development with MVVM. In a world with declarative UI such as SwiftUI, the thinking needs to change. ViewModel was originally introduced for the purpose of Binding the state to the View and reflecting it to Reactive, but since the declarative UI includes that functionality, ViewModel is unnecessary."
 2. "For small to medium scale applications, MV (Model and View) is all you need."
 3. "In the era of declarative UI, what we really want in large-scale app development is MVI (unidirectional data flow), Flux (The Composable Architecture), and Store/Provider patterns."
+4. Apple themselves don't use MVVM.
 Source: https://medium.com/@karamage/stop-using-mvvm-with-swiftui-2c46eb2cc8dc

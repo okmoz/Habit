@@ -82,12 +82,13 @@ struct HabitRowView: View {
             ForEach(0..<5) {number in
                 let daysAgo = abs(number - 4) // reverse order
                 Button {
-                    toggleCheckmark(daysAgo: daysAgo)
+                    dataController.toggleCompletion(for: habit, daysAgo: daysAgo)
                 } label: {
-                    Image(isChecked(daysAgo: daysAgo) ? "checkmark" : "circle")
+                    let isCompleted = habit.isCompleted(daysAgo: daysAgo)
+                    Image(isCompleted ? "checkmark" : "circle")
                         .resizable()
                         .foregroundColor(.primary) // For this to work, set rendering mode to Template inside Attributes Inspector for the image.
-                        .padding(isChecked(daysAgo: daysAgo) ? 9 : 10)
+                        .padding(isCompleted ? 9 : 10)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: Constants.dayOfTheWeekFrameSize, height: Constants.dayOfTheWeekFrameSize)
                         .contentShape(Rectangle())
@@ -101,31 +102,6 @@ struct HabitRowView: View {
             .font(.custom("", size: 19, relativeTo: .title3))
             .lineLimit(2)
     }
-
-    func toggleCheckmark(daysAgo: Int) {
-        let today = Date.now
-        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
-
-        if isChecked(daysAgo: daysAgo) {
-            habit.removeDate(todayMinusDaysAgo)
-        } else {
-            habit.addDate(todayMinusDaysAgo)
-        }
-
-        dataController.save()
-    }
-    
-    func isChecked(daysAgo: Int) -> Bool {
-        let today = Date.now
-        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
-        
-        for checkedDate in habit.checkedDates {
-            if Calendar.current.isDate(checkedDate, inSameDayAs: todayMinusDaysAgo) {
-                return true
-            }
-        }
-        return false
-    } 
 }
 
 struct HabitRowView_Previews: PreviewProvider {

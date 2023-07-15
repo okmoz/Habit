@@ -21,6 +21,21 @@ enum Constants {
     ///
     /// It is used to ensure that the frame size of the checkmark (HabitRowView) and the frame size of the day of the week (HeaderView) remain consistent.
     static let dayOfTheWeekFrameSize: CGFloat = 32
+    
+    static func getRandomDates(maxDaysBack: Int, chanceFrom0To100: Int = 60) -> [Date] {
+        var dates: [Date] = []
+        let today = Date.now
+        
+        for daysBack in 0..<maxDaysBack {
+            let shouldAddDate = Int.random(in: 1...100) <= chanceFrom0To100 // returns true with a chance of ..%
+            
+            if shouldAddDate {
+                let todayMinusDaysBack = Calendar.current.date(byAdding: .day, value: -daysBack, to: today)!
+                dates.append(todayMinusDaysBack)
+            }
+        }
+        return dates
+    }
 }
 
 

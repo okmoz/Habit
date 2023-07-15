@@ -108,12 +108,73 @@ class DataController: ObservableObject {
         let viewContext = container.viewContext
         
         for i in 0..<10 {
-            let newHabit = Habit(context: viewContext)
-            newHabit.title = "Habit \(i)"
-            newHabit.creationDate = Date()
-            newHabit.color = HabitColor.randomColor
+            let _ = Habit(context: viewContext, title: "Habit \(i)", motivation: "", color: HabitColor.randomColor)
         }
         
         try viewContext.save()
+    }
+    
+}
+
+
+extension DataController {
+    
+    func getAllHabits() -> [Habit] {
+        let request: NSFetchRequest<Habit> = Habit.fetchRequest()
+        do {
+            return try container.viewContext.fetch(request).sorted(by:  { $0.creationDate < $1.creationDate })
+        } catch {
+            print("Couldn't fetch all habits: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    func findHabit(withId id: UUID) throws -> Habit {
+        let request: NSFetchRequest<Habit> = Habit.fetchRequest()
+        request.fetchLimit = 1
+        request.predicate = NSPredicate(format: "id_ = %@", id as CVarArg)
+        
+        do {
+            guard let foundHabit = try container.viewContext.fetch(request).first else {
+                throw Error.notFound
+            }
+            return foundHabit
+        } catch {
+            throw Error.notFound
+        }
+    }
+    
+    /// Adds a date to the list of completed dates for the habit.
+    ///
+    /// - Parameter date: The date to add.
+    func addCompletedDate(for habit: Habit, date: Date) {
+        habit.completedDates.append(date)
+    }
+    
+    /// Removes a date from the list of completed dates for the habit.
+    ///
+    /// - Parameter date: The date to remove.
+    func removeCompletedDate(for habit: Habit, date: Date) {
+        habit.completedDates.removeAll(where: { Calendar.current.isDate($0, inSameDayAs: date) } )
+    }
+    
+    func completeForToday(habit: Habit) {
+        if !habit.isCompleted(daysAgo: 0) {
+            addCompletedDate(for: habit, date: Date.now)
+            save()
+        }
+    }
+    
+    func toggleCompletion(for habit: Habit, daysAgo: Int) {
+        let today = Date.now
+        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
+
+        if habit.isCompleted(daysAgo: daysAgo) {
+            self.removeCompletedDate(for: habit, date: todayMinusDaysAgo)
+        } else {
+            self.addCompletedDate(for: habit, date: todayMinusDaysAgo)
+        }
+        
+        save()
     }
 }

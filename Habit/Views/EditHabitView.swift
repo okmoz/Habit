@@ -43,7 +43,7 @@ struct EditHabitView: View {
                 nameTextField
                 motivationTextField
                 colorPicker
-                ChartView(dates: habit?.checkedDates ?? [], color: color)
+                ChartView(dates: habit?.completedDates ?? [], color: color)
                     .padding()
                 Spacer()
             }
