@@ -52,12 +52,12 @@ struct HabitRowView: View {
     }
     
     var percentageView: some View {
-        Text("\(habit.percentage)%")
+        Text("\(habit.completionPercentage)%")
             .font(.system(size: 11, weight: .medium))
             .foregroundColor(.black)
             .background(
                 Circle()
-                    .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.percentage) * 6.4)) // workaround because setting size with frame does not work
+                    .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.completionPercentage) * 6.4)) // workaround because setting size with frame does not work
                     // FIXME: find a way to calculate 100% that should expand the circle all the way
                     .background(Circle().fill(Color(habit.color))) // workaround to stroke and fill at the same time
                     .frame(width: 30, height: 30)
@@ -66,12 +66,12 @@ struct HabitRowView: View {
                 )
 //        ZStack {
 //            Circle()
-//                .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.percentage) * 6.4)) // workaround because setting size with frame does not work
+//                .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.completionPercentage) * 6.4)) // workaround because setting size with frame does not work
 //                // FIXME: find a way to calculate 100% that should expand the circle all the way
 //                .background(Circle().fill(Color(habit.color))) // workaround to stroke and fill at the same time
 //                .frame(width: 30)
 //                .foregroundColor(Color(habit.color))
-//            Text("\(habit.percentage)%")
+//            Text("\(habit.completionPercentage)%")
 //                .font(.system(size: 11))
 //                .foregroundColor(.black)
 //        }

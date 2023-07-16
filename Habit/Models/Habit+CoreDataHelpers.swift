@@ -91,9 +91,18 @@ extension Habit {
 
     /// The percentage of completion for the habit.
     ///
-    /// Represents the completion percentage of the habit based on the number of completed dates. The calculation is performed using the formula:
-    var percentage: Int {
-        completedDates.count * 5 // temporary
+    /// Represents the completion percentage of the habit based on the number of completed dates. The calculation is performed using a logarithmic formula.
+    var completionPercentage: Int {
+        // Get completed dates within the last 70 days
+        let completedDatesWithinLast70Days = completedDates.filter { Constants.isDateWithinLastDays(date: $0, daysAgo: 70) }
+        
+        // Calculate the completion percentage using a logarithmic formula
+        let logNumber = Double(completedDatesWithinLast70Days.count + 1)
+        let logBase = 1.04340035560572 // With this log base, 100% will be reached in 69 days.
+        let calculatedPercentage = Int(log(logNumber)/log(logBase))
+        
+        // Ensure the calculated percentage is within the range of 0 to 100
+        return min(calculatedPercentage, 100)
     }
     
     /// A preconfigured example `Habit` instance for testing or previewing purposes.
