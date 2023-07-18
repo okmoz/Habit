@@ -10,9 +10,8 @@ import SwiftUI
 struct ChartView: View {
     enum DisplayModes: String, Identifiable, CaseIterable {
         var id: Self { self }
-        case threeMonths = "Three months"
         case sixMonths = "Six months"
-        case twelveMonths = "One year"
+        case oneYear = "One year"
     }
     
     var dates: [Date]
@@ -20,7 +19,7 @@ struct ChartView: View {
     
     @AppStorage("displayMode") private var displayMode: DisplayModes = .sixMonths
 
-    private var rows: Int { getNumberOfRows() }
+    private let rows: Int = 7
     private var columns: Int { getNumberOfColumns() }
     private var spacing: CGFloat { getSpacing() }
     private var cornerRadius: CGFloat { getCornerRadius() }
@@ -29,12 +28,17 @@ struct ChartView: View {
     var body: some View {
         VStack {
             HStack {
+                Text("HISTORY")
+                    .font(.caption.bold())
+                Spacer()
                 Picker("Display mode", selection: $displayMode) {
                     ForEach(DisplayModes.allCases) {
                         Text($0.rawValue)
                     }
                 }
-                .pickerStyle(.segmented)
+                .offset(x: 12)
+                .pickerStyle(.menu)
+                .tint(.secondary)
             }
             HStack(spacing: spacing) {
                 ForEach(0..<columns, id: \.self) { column in
@@ -110,50 +114,38 @@ struct ChartView: View {
         }
     }
     
-    func getNumberOfRows() -> Int {
-        return displayMode == .threeMonths ? 5 : 7
-    }
-    
     func getNumberOfColumns() -> Int {
         switch displayMode {
-        case .threeMonths:
-            return Int(365/4/rows)
         case .sixMonths:
             return Int(365/2/rows)
-        case .twelveMonths:
+        case .oneYear:
             return Int(365/rows)
         }
     }
     
     func getSpacing() -> CGFloat {
         switch displayMode {
-        case .threeMonths:
-            return 3
         case .sixMonths:
             return 2.5
-        case .twelveMonths:
+        case .oneYear:
             return 1
         }
     }
     
     func getCornerRadius() -> CGFloat {
         switch displayMode {
-        case .threeMonths:
-            return 4
         case .sixMonths:
             return 2
-        case .twelveMonths:
+        case .oneYear:
             return 2
         }
     }
     
     func getStrokeWidth() -> CGFloat {
         switch displayMode {
-        case .threeMonths:
-            return 1.2
         case .sixMonths:
             return 1
-        case .twelveMonths:
+        case .oneYear:
             return 0.2
         }
     }
