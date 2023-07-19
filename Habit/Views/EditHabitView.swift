@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreData
 
+// TODO: in edit view, show tip after 3 times the edit view has been shown.
+
 struct EditHabitView: View {
     let habit: Habit?
     
@@ -38,14 +40,20 @@ struct EditHabitView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                customDivider
-                nameTextField
-                motivationTextField
-                colorPicker
-                ChartView(dates: habit?.completedDates ?? [], color: color)
-                    .padding()
-                Spacer()
+            ScrollView {
+                VStack(spacing: 0) {
+                    customDivider
+                    nameTextField
+                    motivationTextField
+                    colorPicker
+                    ChartView(dates: habit?.completedDates ?? [], color: color)
+                        .padding()
+                    TipView(icon: Image(systemName: "wave.3.right.circle"),
+                            title: "Complete habits with NFC tags",
+                            tutorialText: "**Step 1:** Open the \"Shortcuts\" app → Automation → Press \"+\" Button → Create Personal Automation → NFC \n\n**Step 2:** Scan your NFC Tag \n\n**Step 3:** Add Action → Search for \"Complete a Habit\" shortcut → Press on the \"Habit\" field → Choose from a list of your habits \n\n**Step 4:** Press \"Next\" → Turn off \"Ask Before Running\" → Turn on \"Notify When Run\" (Optional) → Press \"Done\"")
+                        .padding()
+                    Spacer()
+                }
             }
             .toolbarBackground(Color(color), for: .navigationBar)
             .toolbarColorScheme(.light, for: .navigationBar)

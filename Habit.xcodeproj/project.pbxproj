@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02089EBD2A626390003DB055 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02089EBC2A626390003DB055 /* CustomErrors.swift */; };
+		02089EC92A66D4A1003DB055 /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02089EC82A66D4A1003DB055 /* TipView.swift */; };
 		020A5DB02A4887100062C283 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020A5DAF2A4887100062C283 /* ChartView.swift */; };
 		0224D8D72A1614B90067B559 /* ColorsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8D62A1614B90067B559 /* ColorsPickerView.swift */; };
 		0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8D82A1796490067B559 /* EditHabitView.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		02089EBC2A626390003DB055 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
+		02089EC82A66D4A1003DB055 /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		020A5DAF2A4887100062C283 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		0224D8D62A1614B90067B559 /* ColorsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerView.swift; sourceTree = "<group>"; };
 		0224D8D82A1796490067B559 /* EditHabitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				0224D8D82A1796490067B559 /* EditHabitView.swift */,
 				0224D8D62A1614B90067B559 /* ColorsPickerView.swift */,
 				020A5DAF2A4887100062C283 /* ChartView.swift */,
+				02089EC82A66D4A1003DB055 /* TipView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				02C3A8912A0FBA7A0044D090 /* DataController.swift in Sources */,
 				0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */,
 				02089EBD2A626390003DB055 /* CustomErrors.swift in Sources */,
+				02089EC92A66D4A1003DB055 /* TipView.swift in Sources */,
 				02FD366A2A4F33080023AB38 /* CompleteHabitIntent.swift in Sources */,
 				02C3A88A2A0FBA780044D090 /* ContentView.swift in Sources */,
 				02C3A89D2A1218A50044D090 /* HabitRowView.swift in Sources */,
