@@ -16,6 +16,9 @@ struct ContentView: View {
     private var habits: FetchedResults<Habit>
     
     @State private var isPresentingAddHabitView = false
+    @State private var selectedSortingOption: SortingOption = .byDate
+    @State private var isSortingOrderDescending = true
+    @State private var isHapticFeedbackOn = true
     
     var body: some View {
         NavigationView {
@@ -54,7 +57,7 @@ struct ContentView: View {
                 isPresentingAddHabitView = true
             } label: {
                 Image(systemName: "plus")
-                    .font(.title2.weight(.light))
+                    .font(.title3.weight(.light))
                     .foregroundColor(.primary)
             }
             
@@ -63,10 +66,16 @@ struct ContentView: View {
     
     var burgerMenuToolbarItem: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
-            Image(systemName: "line.3.horizontal")
-                .font(.title2.weight(.light))
+            OptionsMenuView(
+                selectedSortingOption: $selectedSortingOption,
+                isSortingOrderDescending: $isSortingOrderDescending,
+                isHapticFeedbackOn: $isHapticFeedbackOn
+            )
+            .foregroundColor(.primary)
         }
     }
+    
+
     
 
     

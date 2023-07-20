@@ -16,6 +16,7 @@
 		0259820F2A2A16E80085D29E /* Notes (Sean Allen).md in Resources */ = {isa = PBXBuildFile; fileRef = 0259820E2A2A16E80085D29E /* Notes (Sean Allen).md */; };
 		026E1CAB2A24B58900B882C1 /* HabitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E1CAA2A24B58900B882C1 /* HabitUITests.swift */; };
 		026E1CAD2A24B58900B882C1 /* HabitUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E1CAC2A24B58900B882C1 /* HabitUITestsLaunchTests.swift */; };
+		0282C6B72A6825EC00356786 /* OptionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282C6B62A6825EC00356786 /* OptionsMenuView.swift */; };
 		02C3A8882A0FBA780044D090 /* HabitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8872A0FBA780044D090 /* HabitApp.swift */; };
 		02C3A88A2A0FBA780044D090 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8892A0FBA780044D090 /* ContentView.swift */; };
 		02C3A88C2A0FBA7A0044D090 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C3A88B2A0FBA7A0044D090 /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		026E1CA82A24B58900B882C1 /* HabitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		026E1CAA2A24B58900B882C1 /* HabitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitUITests.swift; sourceTree = "<group>"; };
 		026E1CAC2A24B58900B882C1 /* HabitUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0282C6B62A6825EC00356786 /* OptionsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsMenuView.swift; sourceTree = "<group>"; };
 		02C3A8842A0FBA780044D090 /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02C3A8872A0FBA780044D090 /* HabitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitApp.swift; sourceTree = "<group>"; };
 		02C3A8892A0FBA780044D090 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				0224D8D62A1614B90067B559 /* ColorsPickerView.swift */,
 				020A5DAF2A4887100062C283 /* ChartView.swift */,
 				02089EC82A66D4A1003DB055 /* TipView.swift */,
+				0282C6B62A6825EC00356786 /* OptionsMenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */,
 				02089EBD2A626390003DB055 /* CustomErrors.swift in Sources */,
 				02089EC92A66D4A1003DB055 /* TipView.swift in Sources */,
+				0282C6B72A6825EC00356786 /* OptionsMenuView.swift in Sources */,
 				02FD366A2A4F33080023AB38 /* CompleteHabitIntent.swift in Sources */,
 				02C3A88A2A0FBA780044D090 /* ContentView.swift in Sources */,
 				02C3A89D2A1218A50044D090 /* HabitRowView.swift in Sources */,
