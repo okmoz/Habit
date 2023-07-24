@@ -2,7 +2,7 @@
 
 refactor completed dates in DataController
 
-
+move history text out of ChartView
 
 
 ### OTHER:

@@ -44,10 +44,10 @@ struct HabitRowView: View {
         }
         .frame(height: 95)
         .clipShape(
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
         )
         .sheet(isPresented: $isPresentingEditHabitView) {
-            EditHabitView(habit: habit)
+            DetailView(habit: habit)
         }
     }
     

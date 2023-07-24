@@ -111,3 +111,17 @@ CHARTVIEW:
         
         return dayNumber
     }
+
+
+    
+    var dateComponents: DateComponents {
+        var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+        dateComponents.timeZone = TimeZone.current
+        dateComponents.calendar = Calendar(identifier: .gregorian)
+        return dateComponents
+    }
+
+    func difference(numDays: Int) -> Date {
+        Calendar.current.date(byAdding: .day, value: numDays, to: self)!
+    }
+    
