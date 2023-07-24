@@ -20,7 +20,7 @@ struct OptionsMenuView: View {
     
     // Item selection in Picker is handled internally, so we need a custom binding that will handle the "willSet" case when the selection has changed. This way, we will have access to the old value of the binding before it gets replaced with a new one.
     var sorting: Binding<SortingOption> {
-        Binding(
+        .init(
             get: { self.selectedSortingOption },
             set: { newValue in
                 if self.selectedSortingOption == newValue {
