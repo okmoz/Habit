@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// TODO: confirmation before changing completed dates
-
 struct DetailView: View {
     @ObservedObject var habit: Habit
     
@@ -33,6 +31,7 @@ struct DetailView: View {
                 overview
                 ChartView(dates: habit.completedDates, color: habit.color)
                     .padding()
+                CalendarView(dateInterval: .init(start: .distantPast, end: .today()), completedDates: completedDates, color: habit.color)
             }
             .navigationTitle("\(habit.title)")
             .toolbarBackground(Color(habit.color), for: .navigationBar)

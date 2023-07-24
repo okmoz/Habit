@@ -8,8 +8,6 @@
 import SwiftUI
 import CoreData
 
-// TODO: in edit view, show tip after 3 times the edit view has been shown.
-
 struct EditHabitView: View {
     let habit: Habit?
     
@@ -42,29 +40,28 @@ struct EditHabitView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
-                    customDivider
                     nameTextField
                     motivationTextField
                     colorPicker
-                    ChartView(dates: habit?.completedDates ?? [], color: color)
-                        .padding()
-                    TipView(icon: Image(systemName: "wave.3.right.circle"),
-                            title: "Complete habits with NFC tags",
-                            tutorialText: "**Step 1:** Open the \"Shortcuts\" app → Automation → Press \"+\" Button → Create Personal Automation → NFC \n\n**Step 2:** Scan your NFC Tag \n\n**Step 3:** Add Action → Search for \"Complete a Habit\" shortcut → Press on the \"Habit\" field → Choose from a list of your habits \n\n**Step 4:** Press \"Next\" → Turn off \"Ask Before Running\" → Turn on \"Notify When Run\" (Optional) → Press \"Done\"")
-                        .padding()
-                    Spacer()
+                    //                    ChartView(dates: habit?.completedDates ?? [], color: color)
+                    //                        .padding()
+                    //                    TipView(icon: Image(systemName: "wave.3.right.circle"),
+                    //                            title: "Complete habits with NFC tags",
+                    //                            tutorialText: "**Step 1:** Open the \"Shortcuts\" app → Automation → Press \"+\" Button → Create Personal Automation → NFC \n\n**Step 2:** Scan your NFC Tag \n\n**Step 3:** Add Action → Search for \"Complete a Habit\" shortcut → Press on the \"Habit\" field → Choose from a list of your habits \n\n**Step 4:** Press \"Next\" → Turn off \"Ask Before Running\" → Turn on \"Notify When Run\" (Optional) → Press \"Done\"")
+                    //                        .padding()
+                    
                 }
+                
             }
-            .toolbarBackground(Color(color), for: .navigationBar)
-            .toolbarColorScheme(.light, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                cancelToolbarItem
                 saveToolbarItem
                 if habit != nil {
                     deleteToolbarItem
                 }
             }
+            .toolbarBackground(Color(color), for: .navigationBar)
+            .toolbarColorScheme(.light, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .navigationTitle(habit == nil ? "Add New Habit" : "Edit a Habit")
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -76,12 +73,6 @@ struct EditHabitView: View {
                 isNameTextFieldFocused = true
             }
         }
-    }
-    
-    var customDivider: some View {
-        Rectangle()
-            .frame(height: 0.1)
-            .foregroundColor(.black)
     }
     
     var nameTextField: some View {
@@ -97,13 +88,13 @@ struct EditHabitView: View {
                 .foregroundColor(.black)
                 .focused($isNameTextFieldFocused)
                 .padding(.horizontal)
-
         }
         .padding(.top, 40)
         .padding(.bottom, 15)
-        .background(
+        .background(alignment: .bottom, content: {
             Color(color)
-        )
+                .frame(height: 500)
+        })
     }
     
     var motivationTextField: some View {
@@ -124,7 +115,7 @@ struct EditHabitView: View {
     
     var colorPicker: some View {
         HStack {
-            Text("Choose color")
+            Text("Color")
             Spacer()
             Circle()
                 .frame(height: 20)
@@ -133,15 +124,6 @@ struct EditHabitView: View {
         .padding()
         .onTapGesture {
             isPresentingColorsPicker = true
-        }
-    }
-    
-    var cancelToolbarItem: some ToolbarContent {
-        ToolbarItem(placement: .cancellationAction) {
-            Button("Cancel") {
-                dismiss()
-            }
-            .foregroundColor(.black)
         }
     }
     
@@ -196,11 +178,9 @@ struct EditHabitView: View {
 
 
 struct HabitView_Previews: PreviewProvider {
-    // For some reason CoreData doesn't create habit example in Xcode preview. DataController(inMemory) is initialized properly only on a Simulator.
-    static var habit = Habit.example
-    
     static var previews: some View {
-        EditHabitView(habit: habit)
+        EditHabitView(habit: Habit.example)
+            .previewLayout(.sizeThatFits) // Apparently without this, preview crashes -_-
     }
 }
 

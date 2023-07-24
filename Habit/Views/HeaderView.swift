@@ -12,7 +12,7 @@ struct HeaderView: View {
         HStack {
             Text("Habit")
                 .font(.largeTitle.bold())
-                .padding(.horizontal, 8)
+                .padding(.leading, 8) // 12 or 8?
             Spacer()
             HStack(spacing: 0) {
                 ForEach(0..<5) { number in

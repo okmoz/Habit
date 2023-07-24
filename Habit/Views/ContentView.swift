@@ -66,18 +66,17 @@ struct ContentView: View {
     
     var burgerMenuToolbarItem: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
-            OptionsMenuView(
-                selectedSortingOption: $selectedSortingOption,
-                isSortingOrderDescending: $isSortingOrderDescending,
-                isHapticFeedbackOn: $isHapticFeedbackOn
-            )
+            Image(systemName: "calendar") // calendar / chart.xyaxis.line
+                .font(.system(size: 17).weight(.light))
+
+//            OptionsMenuView(
+//                selectedSortingOption: $selectedSortingOption,
+//                isSortingOrderDescending: $isSortingOrderDescending,
+//                isHapticFeedbackOn: $isHapticFeedbackOn
+//            )
             .foregroundColor(.primary)
         }
     }
-    
-
-    
-
     
     private func deleteItems(offsets: IndexSet) {
         offsets.map { habits[$0] }.forEach(dataController.delete(_:))
