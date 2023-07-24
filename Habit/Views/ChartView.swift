@@ -14,6 +14,7 @@ struct ChartView: View {
         case oneYear = "One year"
     }
     
+    // TODO: make it a Binding
     var dates: [Date]
     var color: HabitColor = .green
     
@@ -110,7 +111,7 @@ struct ChartView: View {
 
     func isDateCompleted(_ habitDate: Date) -> Bool {
         return dates.contains { date in
-            Calendar.current.isDate(date, inSameDayAs: habitDate)
+            date.isInSameDay(as: habitDate)
         }
     }
     

@@ -17,7 +17,6 @@ extension Date {
 
 // Source: https://stackoverflow.com/a/33397770
 extension Date {
-    
     static func today() -> Date {
         return Date()
     }
@@ -88,6 +87,42 @@ extension Date {
             case .previous:
                 return .backward
             }
+        }
+    }
+}
+
+extension Date {
+    func isInSameDay(as date: Date) -> Bool {
+        Calendar.current.isDate(self, inSameDayAs: date)
+    }
+}
+
+
+extension [Date] {
+    var asDateComponents: [DateComponents] {
+        self.map { date in
+            var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+            dateComponents.timeZone = TimeZone.current
+            dateComponents.calendar = Calendar(identifier: .gregorian)
+            return dateComponents
+        }
+    }
+}
+
+extension DateComponents {
+    var date: Date {
+        Calendar.current.date(from: self)!
+    }
+    
+    func isInSameDay(as dateComponents: DateComponents) -> Bool {
+        Calendar.current.isDate(self.date, inSameDayAs: dateComponents.date)
+    }
+}
+
+extension [DateComponents] {
+    var asDates: [Date] {
+        self.compactMap { dateComponents in
+            dateComponents.date
         }
     }
 }

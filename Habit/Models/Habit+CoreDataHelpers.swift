@@ -136,4 +136,13 @@ extension Habit {
         }
         return false
     }
+    
+//    func isCompleted(date: Date) -> Bool {
+//        for completedDate in completedDates {
+//            if Calendar.current.isDate(completedDate, inSameDayAs: date) {
+//                return true
+//            }
+//        }
+//        return false
+//    }
 }

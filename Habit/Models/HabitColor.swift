@@ -44,3 +44,9 @@ extension Color {
         self.init(customColor.rawValue)
     }
 }
+
+extension UIColor {
+    convenience init?(_ customColor: HabitColor) {
+        self.init(named: customColor.rawValue)
+    }
+}
