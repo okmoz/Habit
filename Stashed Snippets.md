@@ -125,3 +125,53 @@ CHARTVIEW:
         Calendar.current.date(byAdding: .day, value: numDays, to: self)!
     }
     
+
+// Source: https://www.avanderlee.com/swiftui/conditional-view-modifier/
+extension View {
+    /// Applies the given transform if the given condition evaluates to `true`.
+    /// - Parameters:
+    ///   - condition: The condition to evaluate.
+    ///   - transform: The transform to apply to the source `View`.
+    /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
+
+
+HabitRowView (percentageView)
+//        ZStack {
+//            Circle()
+//                .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.strengthPercentage) * 6.4)) // workaround because setting size with frame does not work
+//                // FIXME: find a way to calculate 100% that should expand the circle all the way
+//                .background(Circle().fill(Color(habit.color))) // workaround to stroke and fill at the same time
+//                .frame(width: 30)
+//                .foregroundColor(Color(habit.color))
+//            Text("\(habit.strengthPercentage)%")
+//                .font(.system(size: 11))
+//                .foregroundColor(.black)
+//        }
+
+
+EditHabitView
+
+                    //                    ChartView(dates: habit?.completedDates ?? [], color: color)
+                    //                        .padding()
+                    //                    TipView(icon: Image(systemName: "wave.3.right.circle"),
+                    //                            title: "Complete habits with NFC tags",
+                    //                            tutorialText: "**Step 1:** Open the \"Shortcuts\" app → Automation → Press \"+\" Button → Create Personal Automation → NFC \n\n**Step 2:** Scan your NFC Tag \n\n**Step 3:** Add Action → Search for \"Complete a Habit\" shortcut → Press on the \"Habit\" field → Choose from a list of your habits \n\n**Step 4:** Press \"Next\" → Turn off \"Ask Before Running\" → Turn on \"Notify When Run\" (Optional) → Press \"Done\"")
+                    //                        .padding()
+
+Habit+Utils
+//    func isCompleted(date: Date) -> Bool {
+//        for completedDate in completedDates {
+//            if Calendar.current.isDate(completedDate, inSameDayAs: date) {
+//                return true
+//            }
+//        }
+//        return false
+//    }

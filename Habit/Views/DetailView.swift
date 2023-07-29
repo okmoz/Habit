@@ -7,11 +7,10 @@
 
 import SwiftUI
 
+
 struct DetailView: View {
     @ObservedObject var habit: Habit
-    
-    @EnvironmentObject var dataController: DataController
-    @Environment(\.dismiss) var dismiss
+    @AppStorage("overviewPageIndex") private var overviewPageIndex = 0
     
     private var completedDates: Binding<[DateComponents]> {
         Binding(
@@ -23,14 +22,17 @@ struct DetailView: View {
         )
     }
     
+    @EnvironmentObject var dataController: DataController
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 regularityAndReminder
-                // Carousel like me+
                 overview
                 ChartView(dates: habit.completedDates, color: habit.color)
-                    .padding()
+                    .padding([.horizontal, .bottom])
                 CalendarView(dateInterval: .init(start: .distantPast, end: .today()), completedDates: completedDates, color: habit.color)
             }
             .navigationTitle("\(habit.title)")
@@ -52,6 +54,9 @@ struct DetailView: View {
                     .foregroundColor(.black)
                 }
             }
+            .onAppear {
+                setupAppearance()
+            }
         }
     }
     
@@ -64,7 +69,7 @@ struct DetailView: View {
             }
             .padding(.leading)
             .padding(.trailing, 70)
-            
+
             VStack(alignment: .leading) {
                 Text("REMIND ME")
                     .font(.caption.bold())
@@ -82,25 +87,56 @@ struct DetailView: View {
     }
     
     var overview: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                VStack(alignment: .leading) {
-                    Text("OVERVIEW")
-                        .font(.caption.bold())
-                    Text("\(habit.completionPercentage)%")
-                        .font(.system(size: 50).bold())
-                }
-                HStack {
-                    Text("Month +2%")
-                        .padding(.trailing, 60)
-                    Text("Year +99%")
+        ZStack(alignment: .topLeading) {
+            TabView(selection: $overviewPageIndex) {
+                OverviewView(title: "Habit Strength", mainText: "\(habit.strengthPercentage)%", secondaryText1: "Month: +\(habit.strengthGainedWithinLastDays(daysAgo: 30))%", secondaryText2: "Year: +\(habit.strengthGainedWithinLastDays(daysAgo: 365))%").tag(0)     // Note: There is no point in calculating strength gained in last year because with current formula strengthGainedInYear will always be equal to strengthPercentage.
+                OverviewView(title: "Completions", mainText: "\(habit.completedDates.count)", secondaryText1: "Month: +\(habit.completionsWithinLastDays(daysAgo: 30))", secondaryText2: "Year: +\(habit.completionsWithinLastDays(daysAgo: 365))").tag(1)
+                OverviewView(title: "Streak", mainText: "\(habit.streak) days", secondaryText1: "Longest Streak: \(habit.longestStreak) days", secondaryText2: "").tag(2)
+            }
+            .tabViewStyle(.page)
+            .frame(height: 190)
+            
+            Text("OVERVIEW")
+                .font(.caption.bold())
+                .padding()
+        }
+    }
+    
+    func setupAppearance() {
+        // Fixes SwiftUI bug where paging dots are white in Light Mode.
+        let color = UIColor.label
+        UIPageControl.appearance().currentPageIndicatorTintColor = color
+        UIPageControl.appearance().pageIndicatorTintColor = color.withAlphaComponent(0.4)
+    }
+    
+    struct OverviewView: View {
+        var title: String
+        var mainText: String
+        var secondaryText1: String
+        var secondaryText2: String
+        
+        var body: some View {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("\(title)")
+                    .font(.title3.bold())
+                HStack() {
+                    VStack(alignment: .leading) {
+                        VStack() {
+                            Text("\(mainText)")
+                                .font(.system(size: 50).bold())
+                        }
+                        HStack {
+                            Text("\(secondaryText1)")
+                                .padding(.trailing, 60)
+                            Text("\(secondaryText2)")
+                        }
+                    }
+                    .foregroundColor(.primary)
+                    Spacer()
                 }
             }
-            .foregroundColor(.primary)
-
-            Spacer()
+            .padding()
         }
-        .padding()
     }
 }
 

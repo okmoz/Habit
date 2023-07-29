@@ -89,22 +89,6 @@ extension Habit {
         set { completedDates_ = newValue }
     }
 
-    /// The percentage of completion for the habit.
-    ///
-    /// Represents the completion percentage of the habit based on the number of completed dates. The calculation is performed using a logarithmic formula.
-    var completionPercentage: Int {
-        // Get completed dates within the last 70 days
-        let completedDatesWithinLast70Days = completedDates.filter { Constants.isDateWithinLastDays(date: $0, daysAgo: 70) }
-        
-        // Calculate the completion percentage using a logarithmic formula
-        let logNumber = Double(completedDatesWithinLast70Days.count + 1)
-        let logBase = 1.04340035560572 // With this log base, 100% will be reached in 69 days.
-        let calculatedPercentage = Int(log(logNumber)/log(logBase))
-        
-        // Ensure the calculated percentage is within the range of 0 to 100
-        return min(calculatedPercentage, 100)
-    }
-    
     /// A preconfigured example `Habit` instance for testing or previewing purposes.
     ///
     /// - Note: This example habit is created in an in-memory managed object context and is not persisted to disk. It serves as a placeholder or template for displaying sample data.
@@ -124,25 +108,4 @@ extension Habit {
         
         return habit
     }
-    
-    func isCompleted(daysAgo: Int) -> Bool {
-        let today = Date.now
-        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
-        
-        for completedDate in completedDates {
-            if Calendar.current.isDate(completedDate, inSameDayAs: todayMinusDaysAgo) {
-                return true
-            }
-        }
-        return false
-    }
-    
-//    func isCompleted(date: Date) -> Bool {
-//        for completedDate in completedDates {
-//            if Calendar.current.isDate(completedDate, inSameDayAs: date) {
-//                return true
-//            }
-//        }
-//        return false
-//    }
 }

@@ -9,11 +9,8 @@ import SwiftUI
 
 struct HabitRowView: View {
     @ObservedObject var habit: Habit
-    
     @State private var isPresentingEditHabitView = false
-    
     @EnvironmentObject var dataController: DataController
-    
     @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
@@ -52,29 +49,18 @@ struct HabitRowView: View {
     }
     
     var percentageView: some View {
-        Text("\(habit.completionPercentage)%")
+        Text("\(habit.strengthPercentage)%")
             .font(.system(size: 11, weight: .medium))
             .foregroundColor(.black)
             .background(
                 Circle()
-                    .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.completionPercentage) * 6.4)) // workaround because setting size with frame does not work
+                    .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.strengthPercentage) * 6.4)) // workaround because setting size with frame does not work
                     // FIXME: find a way to calculate 100% that should expand the circle all the way
                     .background(Circle().fill(Color(habit.color))) // workaround to stroke and fill at the same time
                     .frame(width: 30, height: 30)
                     .foregroundColor(Color(habit.color))
                     .offset(x: -0.5)
                 )
-//        ZStack {
-//            Circle()
-//                .stroke(style: StrokeStyle(lineWidth: CGFloat(habit.completionPercentage) * 6.4)) // workaround because setting size with frame does not work
-//                // FIXME: find a way to calculate 100% that should expand the circle all the way
-//                .background(Circle().fill(Color(habit.color))) // workaround to stroke and fill at the same time
-//                .frame(width: 30)
-//                .foregroundColor(Color(habit.color))
-//            Text("\(habit.completionPercentage)%")
-//                .font(.system(size: 11))
-//                .foregroundColor(.black)
-//        }
     }
     
     var checkmarksView: some View {

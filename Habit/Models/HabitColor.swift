@@ -28,6 +28,8 @@ enum HabitColor: String, CaseIterable, Identifiable {
     }
 }
 
+
+// FIXME: move to Extensions
 extension Color {
     /// Initializes a SwiftUI `Color` instance with a custom `HabitColor`.
     ///

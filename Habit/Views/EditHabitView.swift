@@ -15,7 +15,7 @@ struct EditHabitView: View {
     @State private var motivation: String = ""
     @State private var color: HabitColor = HabitColor.randomColor
     
-    @State private var motivationPrompt = Constants.motivationPrompts.randomElement() ?? "Yes, you can! 💪"
+    private var motivationPrompt = Constants.motivationPrompts.randomElement() ?? "Yes, you can! 💪"
     
     @State private var isPresentingColorsPicker = false
     
@@ -42,14 +42,7 @@ struct EditHabitView: View {
                 VStack(spacing: 0) {
                     nameTextField
                     motivationTextField
-                    colorPicker
-                    //                    ChartView(dates: habit?.completedDates ?? [], color: color)
-                    //                        .padding()
-                    //                    TipView(icon: Image(systemName: "wave.3.right.circle"),
-                    //                            title: "Complete habits with NFC tags",
-                    //                            tutorialText: "**Step 1:** Open the \"Shortcuts\" app → Automation → Press \"+\" Button → Create Personal Automation → NFC \n\n**Step 2:** Scan your NFC Tag \n\n**Step 3:** Add Action → Search for \"Complete a Habit\" shortcut → Press on the \"Habit\" field → Choose from a list of your habits \n\n**Step 4:** Press \"Next\" → Turn off \"Ask Before Running\" → Turn on \"Notify When Run\" (Optional) → Press \"Done\"")
-                    //                        .padding()
-                    
+                    colorPicker                    
                 }
                 
             }
@@ -180,7 +173,7 @@ struct EditHabitView: View {
 struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
         EditHabitView(habit: Habit.example)
-            .previewLayout(.sizeThatFits) // Apparently without this, preview crashes -_-
+            .previewLayout(.sizeThatFits) // Apparently, without this, preview crashes -_-
     }
 }
 
