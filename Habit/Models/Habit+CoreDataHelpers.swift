@@ -35,17 +35,7 @@ extension Habit {
     }
     
     public var id: UUID {
-        get {
-            if let id_ {
-                return id_
-            } else {
-                // Creates a new UUID for a habit that previously didn't have one. For migration and safety purposes. -Is this a good idea? Saving moc when accessing an attribute might not be good.
-                id_ = UUID()
-                try? self.managedObjectContext?.save()
-                print("Created a UUID for habit '\(title)' because it was 'nil'.")
-                return id_ ?? UUID()
-            }
-        }
+        get { id_ ?? UUID() }
         set { id_ = newValue }
     }
     
