@@ -1,6 +1,7 @@
 #  TODO
 
 refactor completed dates in DataController
+ask before deletion
 
 move history text out of ChartView
 

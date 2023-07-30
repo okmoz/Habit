@@ -6,49 +6,27 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var dataController: DataController
-    
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Habit.creationDate_, ascending: false)])
-    private var habits: FetchedResults<Habit>
-    
     @State private var isPresentingAddHabitView = false
-    @State private var selectedSortingOption: SortingOption = .byDate
-    @State private var isSortingOrderDescending = true
-    @State private var isHapticFeedbackOn = true
+    @AppStorage("sortingOption") private var sortingOption: SortingOption = .byDate
+    @AppStorage("isSortingOrderDescending") private var isSortingOrderAscending = false
     
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 Divider()
                 HeaderView()
-                habitList
+                HabitListView(sortingOption: sortingOption, isSortingOrderAscending: isSortingOrderAscending)
             }
             .toolbar {
                 addHabitToolbarItem
-                burgerMenuToolbarItem
+                sortMenuToolbarItem
             }
             .sheet(isPresented: $isPresentingAddHabitView) {
                 EditHabitView(habit: nil)
             }
         }
-    }
-    
-    var habitList: some View {
-        List {
-            ForEach(habits) { habit in
-                HabitRowView(habit: habit)
-            }
-            .onDelete(perform: deleteItems)
-            .listRowSeparator(.hidden)
-            .buttonStyle(.plain)
-            .listRowInsets(.init(top: 8, leading: 16, bottom: 6, trailing: 16))
-        }
-        .listStyle(.plain)
-
     }
     
     var addHabitToolbarItem: some ToolbarContent {
@@ -57,30 +35,18 @@ struct ContentView: View {
                 isPresentingAddHabitView = true
             } label: {
                 Image(systemName: "plus")
-                    .font(.title3.weight(.light))
-                    .foregroundColor(.primary)
+                    .font(.system(size: 19).weight(.light))
+                    .tint(.primary)
             }
             
         }
     }
     
-    var burgerMenuToolbarItem: some ToolbarContent {
+    var sortMenuToolbarItem: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
-            Image(systemName: "calendar") // calendar / chart.xyaxis.line
-                .font(.system(size: 17).weight(.light))
-
-//            OptionsMenuView(
-//                selectedSortingOption: $selectedSortingOption,
-//                isSortingOrderDescending: $isSortingOrderDescending,
-//                isHapticFeedbackOn: $isHapticFeedbackOn
-//            )
-            .foregroundColor(.primary)
+            SortMenuView(selectedSortingOption: $sortingOption, isSortingOrderAscending: $isSortingOrderAscending)
+                .tint(.primary)
         }
-    }
-    
-    private func deleteItems(offsets: IndexSet) {
-        offsets.map { habits[$0] }.forEach(dataController.delete(_:))
-        dataController.save()
     }
 }
 

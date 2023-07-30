@@ -67,6 +67,7 @@ struct ChartView: View {
     func getColorForCell(index: Int) -> (fill: Color, stroke: Color) {
         let date = getDateForCell(numberOfDaysAgo: index)
         
+        // Check if day is after today and fill with clear color. If habit has been completed for the date, fill it with habit's color, otherwise fill with ligh gray color. See GitHub's contribution chart for reference of how it should look.
         if isDayAfterToday(date: date) {
             return (fill: .clear, stroke: .clear)
         } else {

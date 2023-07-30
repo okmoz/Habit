@@ -175,3 +175,62 @@ Habit+Utils
 //        }
 //        return false
 //    }
+
+
+Color Invert
+
+import SwiftUI
+
+extension Font {
+    public static func system(
+        size: CGFloat,
+        weight: UIFont.Weight,
+        width: UIFont.Width) -> Font
+    {
+        return Font(
+            UIFont.systemFont(
+                ofSize: size,
+                weight: weight,
+                width: width)
+        )
+    }
+}
+
+struct TestView: View {
+    var body: some View {
+        ZStack {
+            Color.gray
+            Rectangle()
+                .fill(.blue)
+                .rotationEffect(.degrees(45))
+                .offset(x: 0, y: 200)
+            
+            ZStack {
+                text.foregroundColor(.white)
+                    .blendMode(.difference)
+                    .overlay(text.blendMode(.hue))
+                    .overlay(text.foregroundColor(.black).blendMode(.overlay))
+
+                    .overlay(text.foregroundColor(.white).blendMode(.overlay))
+                    .overlay(text.foregroundColor(.white).blendMode(.overlay))
+                    .overlay(text.foregroundColor(.white).blendMode(.overlay))
+
+//                    .overlay(text.foregroundColor(.black).blendMode(.overlay))
+                    
+            }
+        }
+    }
+    var text: some View {
+        Text("One place to stack all your cards")
+            .font(.system(size: 18, weight: .heavy, width: .expanded))
+            .bold()
+            .padding(20)
+            .frame(width: 390)
+    }
+}
+
+struct TestView_Previews: PreviewProvider {
+    static var previews: some View {
+        TestView()
+    }
+}

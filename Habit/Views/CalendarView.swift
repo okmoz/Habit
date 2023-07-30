@@ -51,7 +51,7 @@ struct CalendarView: UIViewRepresentable {
         }
         
         func multiDateSelection(_ selection: UICalendarSelectionMultiDate, didDeselectDate dateComponents: DateComponents) {
-            completedDates.removeAll(where: { $0.isInSameDay(as: dateComponents) } ) // FIXME: temp; any way to compare datecomponents directly?
+            completedDates.removeAll(where: { $0.isInSameDay(as: dateComponents) } )
         }
         
         func multiDateSelection(_ selection: UICalendarSelectionMultiDate, canSelectDate dateComponents: DateComponents) -> Bool {

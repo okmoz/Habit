@@ -48,7 +48,7 @@ struct DetailView: View {
                     .foregroundColor(.black)
                 }
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Dismiss") {
+                    Button("Close") {
                         dismiss()
                     }
                     .foregroundColor(.black)
@@ -89,9 +89,28 @@ struct DetailView: View {
     var overview: some View {
         ZStack(alignment: .topLeading) {
             TabView(selection: $overviewPageIndex) {
-                OverviewView(title: "Habit Strength", mainText: "\(habit.strengthPercentage)%", secondaryText1: "Month: +\(habit.strengthGainedWithinLastDays(daysAgo: 30))%", secondaryText2: "Year: +\(habit.strengthGainedWithinLastDays(daysAgo: 365))%").tag(0)     // Note: There is no point in calculating strength gained in last year because with current formula strengthGainedInYear will always be equal to strengthPercentage.
-                OverviewView(title: "Completions", mainText: "\(habit.completedDates.count)", secondaryText1: "Month: +\(habit.completionsWithinLastDays(daysAgo: 30))", secondaryText2: "Year: +\(habit.completionsWithinLastDays(daysAgo: 365))").tag(1)
-                OverviewView(title: "Streak", mainText: "\(habit.streak) days", secondaryText1: "Longest Streak: \(habit.longestStreak) days", secondaryText2: "").tag(2)
+                // Note: There is no point in calculating strength gained in last year because with current formula strengthGainedInYear will always be equal to strengthPercentage.
+                OverviewView(
+                    title: "Habit Strength",
+                    mainText: "\(habit.strengthPercentage)%",
+                    secondaryText1: "Month: +\(habit.strengthGainedWithinLastDays(daysAgo: 30))%",
+                    secondaryText2: "Year: +\(habit.strengthGainedWithinLastDays(daysAgo: 365))%"
+                )
+                .tag(0)
+                OverviewView(
+                    title: "Completions",
+                    mainText: "\(habit.completedDates.count)",
+                    secondaryText1: "Month: +\(habit.completionsWithinLastDays(daysAgo: 30))",
+                    secondaryText2: "Year: +\(habit.completionsWithinLastDays(daysAgo: 365))"
+                )
+                .tag(1)
+                OverviewView(
+                    title: "Streak",
+                    mainText: "\(habit.streak) days",
+                    secondaryText1: "Longest Streak: \(habit.longestStreak) days",
+                    secondaryText2: ""
+                )
+                .tag(2)
             }
             .tabViewStyle(.page)
             .frame(height: 190)
