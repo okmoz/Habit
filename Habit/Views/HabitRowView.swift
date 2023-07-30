@@ -12,6 +12,7 @@ struct HabitRowView: View {
     @State private var isPresentingEditHabitView = false
     @EnvironmentObject var dataController: DataController
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -87,6 +88,7 @@ struct HabitRowView: View {
         Text(habit.title)
             .font(.custom("", size: 19, relativeTo: .title3))
             .lineLimit(2)
+            .if(colorScheme == .dark) { $0.shadow(radius: 3) }
     }
 }
 

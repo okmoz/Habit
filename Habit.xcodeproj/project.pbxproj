@@ -21,6 +21,7 @@
 		0282C6BB2A6AE7B300356786 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282C6BA2A6AE7B300356786 /* DetailView.swift */; };
 		02C39F962A73BF9500550CA1 /* Habit+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C39F952A73BF9500550CA1 /* Habit+Utils.swift */; };
 		02C39F9E2A765EDF00550CA1 /* HabitListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C39F9D2A765EDF00550CA1 /* HabitListView.swift */; };
+		02C39FA22A768B1F00550CA1 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C39FA12A768B1F00550CA1 /* View+Ext.swift */; };
 		02C3A8882A0FBA780044D090 /* HabitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8872A0FBA780044D090 /* HabitApp.swift */; };
 		02C3A88A2A0FBA780044D090 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3A8892A0FBA780044D090 /* ContentView.swift */; };
 		02C3A88C2A0FBA7A0044D090 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02C3A88B2A0FBA7A0044D090 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		0282C6BA2A6AE7B300356786 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		02C39F952A73BF9500550CA1 /* Habit+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Habit+Utils.swift"; sourceTree = "<group>"; };
 		02C39F9D2A765EDF00550CA1 /* HabitListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitListView.swift; sourceTree = "<group>"; };
+		02C39FA12A768B1F00550CA1 /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		02C3A8842A0FBA780044D090 /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02C3A8872A0FBA780044D090 /* HabitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitApp.swift; sourceTree = "<group>"; };
 		02C3A8892A0FBA780044D090 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			children = (
 				02DAD6BF2A4C42FC00F2DA14 /* Date+Ext.swift */,
 				02DAD6C12A4D772600F2DA14 /* Color+Ext.swift */,
+				02C39FA12A768B1F00550CA1 /* View+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				02FD36682A4F32A70023AB38 /* ShortcutsHabitEntity.swift in Sources */,
 				02C3A8912A0FBA7A0044D090 /* DataController.swift in Sources */,
 				0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */,
+				02C39FA22A768B1F00550CA1 /* View+Ext.swift in Sources */,
 				02089EBD2A626390003DB055 /* CustomErrors.swift in Sources */,
 				02089EC92A66D4A1003DB055 /* TipView.swift in Sources */,
 				0282C6B72A6825EC00356786 /* SortMenuView.swift in Sources */,
