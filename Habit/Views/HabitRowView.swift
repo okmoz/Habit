@@ -29,8 +29,8 @@ struct HabitRowView: View {
                 }
                 .padding(.leading, 22)
                 .padding(.top, 12)
-                VStack() {
-                    HStack() {
+                VStack {
+                    HStack {
                         habitTitle
                             .padding(.horizontal, 22)
                             .allowsHitTesting(false)
@@ -46,6 +46,12 @@ struct HabitRowView: View {
         )
         .sheet(isPresented: $isPresentingEditHabitView) {
             DetailView(habit: habit)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(habit.title), \(habit.strengthPercentage)% strength, \(habit.isCompletedToday ? "completed" : "not completed") for today.")
+        .accessibilityAction(named: "Toggle completion for today") {
+            dataController.toggleCompletion(for: habit, daysAgo: 0)
+            UIAccessibility.post(notification: .announcement, argument: "\(habit.isCompletedToday ? "completed" : "not completed")")
         }
     }
     

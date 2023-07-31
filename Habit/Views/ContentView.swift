@@ -38,7 +38,7 @@ struct ContentView: View {
                     .font(.system(size: 19).weight(.light))
                     .tint(.primary)
             }
-            
+            .accessibilityLabel("Add Habit")
         }
     }
     

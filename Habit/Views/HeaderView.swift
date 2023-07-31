@@ -32,6 +32,7 @@ struct HeaderView: View {
         }
         .padding([.top, .leading, .trailing])
         .padding(.bottom, 4)
+        .accessibilityHidden(true)
     }
     
     func getDayInfo(daysAgo: Int) -> (dayNumber: String, dayName: String) {

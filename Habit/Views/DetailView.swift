@@ -69,12 +69,15 @@ struct DetailView: View {
             }
             .padding(.leading)
             .padding(.trailing, 70)
+            .accessibilityElement(children: .combine)
 
             VStack(alignment: .leading) {
                 Text("REMIND ME")
                     .font(.caption.bold())
                 Text("--:--")
             }
+            .accessibilityElement(children: .combine)
+
             Spacer()
         }
         .foregroundColor(.black)
@@ -97,6 +100,8 @@ struct DetailView: View {
                     secondaryText2: "Year: +\(habit.strengthGainedWithinLastDays(daysAgo: 365))%"
                 )
                 .tag(0)
+                .accessibilityElement(children: .combine)
+                
                 OverviewView(
                     title: "Completions",
                     mainText: "\(habit.completedDates.count)",
@@ -104,6 +109,8 @@ struct DetailView: View {
                     secondaryText2: "Year: +\(habit.completionsWithinLastDays(daysAgo: 365))"
                 )
                 .tag(1)
+                .accessibilityElement(children: .combine)
+
                 OverviewView(
                     title: "Streak",
                     mainText: "\(habit.streak) days",
@@ -111,6 +118,8 @@ struct DetailView: View {
                     secondaryText2: ""
                 )
                 .tag(2)
+                .accessibilityElement(children: .combine)
+
             }
             .tabViewStyle(.page)
             .frame(height: 190)

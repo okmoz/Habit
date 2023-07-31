@@ -41,7 +41,7 @@ enum Constants {
     static func isDateWithinLastDays(date: Date, daysAgo: Int) -> Bool {
         let today = Date.now
         let daysAgoDate = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
-        
+        // TODO: <=  ?
         return daysAgoDate < date
     }
 }

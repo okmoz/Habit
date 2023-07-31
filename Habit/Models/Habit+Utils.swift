@@ -22,6 +22,7 @@ extension Habit {
         
         // Calculate the strength percentage using a logarithmic formula
         let logNumber = Double(completedDatesWithinLast70Days.count + 1)
+        // TODO: Calculate percentage from 0 to 1 instead of 0 to 100
         let logBase = 1.04340035560572 // With this log base, 100% will be reached in 69 days.
         let calculatedPercentage = Int(log(logNumber)/log(logBase))
         
@@ -100,5 +101,9 @@ extension Habit {
             }
         }
         return false
+    }
+    
+    var isCompletedToday: Bool {
+        return isCompleted(daysAgo: 0)
     }
 }

@@ -77,7 +77,8 @@ struct EditHabitView: View {
                     .foregroundColor(.black)
                 Spacer()
             }
-            TextField("", text: $title, prompt: Text("Read a book, Meditate etc.").foregroundColor(.black.opacity(0.23)))
+            .accessibilityHidden(true)
+            TextField("Name", text: $title, prompt: Text("Read a book, Meditate etc.").foregroundColor(.black.opacity(0.23)))
                 .foregroundColor(.black)
                 .focused($isNameTextFieldFocused)
                 .padding(.horizontal)
@@ -98,8 +99,9 @@ struct EditHabitView: View {
                     .font(.caption.bold())
                 Spacer()
             }
+            .accessibilityHidden(true)
             .padding(.top)
-            TextField("", text: $motivation, prompt: Text(motivationPrompt))
+            TextField("Motivation", text: $motivation, prompt: Text(motivationPrompt))
                 .focused($isMotivationTextFieldFocused)
                 .font(.callout)
                 .padding(.horizontal)
@@ -118,6 +120,7 @@ struct EditHabitView: View {
         .onTapGesture {
             isPresentingColorsPicker = true
         }
+        .accessibilityHidden(true)
     }
     
     var saveToolbarItem: some ToolbarContent {

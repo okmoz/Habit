@@ -113,3 +113,13 @@ Why NOT to use MVVM in this SwiftUI project:
 3. "In the era of declarative UI, what we really want in large-scale app development is MVI (unidirectional data flow), Flux (The Composable Architecture), and Store/Provider patterns."
 4. Apple themselves don't use MVVM.
 Source: https://medium.com/@karamage/stop-using-mvvm-with-swiftui-2c46eb2cc8dc
+
+## Accessibility
+From WWDC 2019/
+Accessibility API Summary
+Understandable
+• Provide context by adding labels, values, and hints
+Interactable
+• Simplify by adding custom actions
+Navigable
+• Speed up elements by grouping

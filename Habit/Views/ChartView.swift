@@ -62,6 +62,7 @@ struct ChartView: View {
             }
     //        .drawingGroup()
         }
+        .accessibilityHidden(true)
     }
     
     func getColorForCell(index: Int) -> (fill: Color, stroke: Color) {
