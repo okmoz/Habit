@@ -13,6 +13,7 @@
 		0224D8D72A1614B90067B559 /* ColorsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8D62A1614B90067B559 /* ColorsPickerView.swift */; };
 		0224D8D92A17964A0067B559 /* EditHabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8D82A1796490067B559 /* EditHabitView.swift */; };
 		0224D8DB2A17D6FF0067B559 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224D8DA2A17D6FF0067B559 /* HeaderView.swift */; };
+		0257EED32A7EBB8100A787D6 /* HapticController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0257EED22A7EBB8100A787D6 /* HapticController.swift */; };
 		0259820F2A2A16E80085D29E /* Notes (Sean Allen).md in Resources */ = {isa = PBXBuildFile; fileRef = 0259820E2A2A16E80085D29E /* Notes (Sean Allen).md */; };
 		026E1CAB2A24B58900B882C1 /* HabitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E1CAA2A24B58900B882C1 /* HabitUITests.swift */; };
 		026E1CAD2A24B58900B882C1 /* HabitUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E1CAC2A24B58900B882C1 /* HabitUITestsLaunchTests.swift */; };
@@ -67,6 +68,7 @@
 		0224D8D62A1614B90067B559 /* ColorsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerView.swift; sourceTree = "<group>"; };
 		0224D8D82A1796490067B559 /* EditHabitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
 		0224D8DA2A17D6FF0067B559 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		0257EED22A7EBB8100A787D6 /* HapticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticController.swift; sourceTree = "<group>"; };
 		0259820E2A2A16E80085D29E /* Notes (Sean Allen).md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Notes (Sean Allen).md"; sourceTree = "<group>"; };
 		026E1CA82A24B58900B882C1 /* HabitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		026E1CAA2A24B58900B882C1 /* HabitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitUITests.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				02C3A8902A0FBA7A0044D090 /* DataController.swift */,
+				0257EED22A7EBB8100A787D6 /* HapticController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				0282C6B72A6825EC00356786 /* SortMenuView.swift in Sources */,
 				0282C6BB2A6AE7B300356786 /* DetailView.swift in Sources */,
 				0282C6B92A6AE52E00356786 /* CalendarView.swift in Sources */,
+				0257EED32A7EBB8100A787D6 /* HapticController.swift in Sources */,
 				02FD366A2A4F33080023AB38 /* CompleteHabitIntent.swift in Sources */,
 				02C3A88A2A0FBA780044D090 /* ContentView.swift in Sources */,
 				02C39F9E2A765EDF00550CA1 /* HabitListView.swift in Sources */,

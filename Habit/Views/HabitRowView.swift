@@ -99,6 +99,7 @@ struct HabitRowView: View {
     
     func toggleCompletion(daysAgo: Int) {
         habit.toggleCompletion(daysAgo: daysAgo)
+        HapticController.shared.impact(style: .soft)
         dataController.save()
     }
 }

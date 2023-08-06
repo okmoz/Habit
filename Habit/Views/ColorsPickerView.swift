@@ -36,6 +36,7 @@ struct ColorsPickerView: View {
                         }
                         .onTapGesture {
                             self.selectedColor = color
+                            HapticController.shared.impact(style: .rigid)
                             dismiss()
                         }
                 }

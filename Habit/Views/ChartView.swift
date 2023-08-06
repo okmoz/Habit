@@ -62,6 +62,9 @@ struct ChartView: View {
             }
     //        .drawingGroup()
         }
+        .onChange(of: displayMode, perform: { _ in
+            HapticController.shared.impact(style: .light)
+        })
         .accessibilityHidden(true)
     }
     
