@@ -22,7 +22,9 @@ struct CompleteHabitIntent: AppIntent {
     @MainActor
     func perform() async throws -> some IntentResult {
         let matchingHabit = try DataController.shared.findHabit(withId: habit.id)
-        DataController.shared.completeForToday(habit: matchingHabit)
+        let today = Date.now
+        matchingHabit.addCompletedDate(today)
+        DataController.shared.save()
         return .result()
     }
 }

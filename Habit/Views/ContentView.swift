@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isPresentingAddHabitView = false
+    @State private var isPresentingEditHabitView = false
     @AppStorage("sortingOption") private var sortingOption: SortingOption = .byDate
     @AppStorage("isSortingOrderDescending") private var isSortingOrderAscending = false
     
@@ -20,19 +20,19 @@ struct ContentView: View {
                 HabitListView(sortingOption: sortingOption, isSortingOrderAscending: isSortingOrderAscending)
             }
             .toolbar {
-                addHabitToolbarItem
+                editHabitToolbarItem
                 sortMenuToolbarItem
             }
-            .sheet(isPresented: $isPresentingAddHabitView) {
+            .sheet(isPresented: $isPresentingEditHabitView) {
                 EditHabitView(habit: nil)
             }
         }
     }
     
-    var addHabitToolbarItem: some ToolbarContent {
+    var editHabitToolbarItem: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
-                isPresentingAddHabitView = true
+                isPresentingEditHabitView = true
             } label: {
                 Image(systemName: "plus")
                     .font(.system(size: 19).weight(.light))

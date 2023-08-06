@@ -144,48 +144,4 @@ extension DataController {
         }
     }
     
-    /// Adds a date to the list of completed dates for the habit.
-    ///
-    /// - Parameter date: The date to add.
-    func addCompletedDate(for habit: Habit, date: Date) {
-        habit.completedDates.append(date)
-    }
-    
-    /// Removes a date from the list of completed dates for the habit.
-    ///
-    /// - Parameter date: The date to remove.
-    func removeCompletedDate(for habit: Habit, date: Date) {
-        habit.completedDates.removeAll(where: { $0.isInSameDay(as: date) } )
-    }
-    
-    func completeForToday(habit: Habit) {
-        if !habit.isCompleted(daysAgo: 0) {
-            addCompletedDate(for: habit, date: Date.now)
-            save()
-        }
-    }
-    
-    // FIXME: Put inside habit helpers?
-    func toggleCompletion(for habit: Habit, daysAgo: Int) {
-        let today = Date.now
-        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
-
-        if habit.isCompleted(daysAgo: daysAgo) {
-            self.removeCompletedDate(for: habit, date: todayMinusDaysAgo)
-        } else {
-            self.addCompletedDate(for: habit, date: todayMinusDaysAgo)
-        }
-        
-        save()
-    }
-    
-//    func toggleCompletion(for habit: Habit, date: Date) {
-//        if habit.isCompleted(date: date) {
-//            self.removeCompletedDate(for: habit, date: date)
-//        } else {
-//            self.addCompletedDate(for: habit, date: date)
-//        }
-//
-//        save()
-//    }
 }

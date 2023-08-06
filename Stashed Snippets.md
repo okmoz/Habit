@@ -234,3 +234,20 @@ struct TestView_Previews: PreviewProvider {
         TestView()
     }
 }
+
+
+//    func toggleCompletion(for habit: Habit, date: Date) {
+//        if habit.isCompleted(date: date) {
+//            self.removeCompletedDate(for: habit, date: date)
+//        } else {
+//            self.addCompletedDate(for: habit, date: date)
+//        }
+//
+//        save()
+//    }
+
+HABIT + UTILS
+
+    var strengthPercentage: Int {
+        getStrengthPercentage(completedDates: completedDates)
+    }

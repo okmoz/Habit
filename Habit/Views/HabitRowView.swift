@@ -48,10 +48,10 @@ struct HabitRowView: View {
             DetailView(habit: habit)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(habit.title), \(habit.strengthPercentage)% strength, \(habit.isCompletedToday ? "completed" : "not completed") for today.")
+        .accessibilityLabel("\(habit.title), \(habit.strengthPercentage)% strength, \(habit.isCompleted(daysAgo: 0) ? "completed" : "not completed") for today.")
         .accessibilityAction(named: "Toggle completion for today") {
-            dataController.toggleCompletion(for: habit, daysAgo: 0)
-            UIAccessibility.post(notification: .announcement, argument: "\(habit.isCompletedToday ? "completed" : "not completed")")
+            toggleCompletion(daysAgo: 0)
+            UIAccessibility.post(notification: .announcement, argument: "\(habit.isCompleted(daysAgo: 0) ? "completed" : "not completed")")
         }
     }
     
@@ -75,7 +75,7 @@ struct HabitRowView: View {
             ForEach(0..<5) {number in
                 let daysAgo = abs(number - 4) // reverse order
                 Button {
-                    dataController.toggleCompletion(for: habit, daysAgo: daysAgo)
+                    toggleCompletion(daysAgo: daysAgo)
                 } label: {
                     let isCompleted = habit.isCompleted(daysAgo: daysAgo)
                     Image(isCompleted ? "checkmark" : "circle")
@@ -95,6 +95,11 @@ struct HabitRowView: View {
             .font(.custom("", size: 19, relativeTo: .title3))
             .lineLimit(2)
             .if(colorScheme == .dark) { $0.shadow(radius: 3) }
+    }
+    
+    func toggleCompletion(daysAgo: Int) {
+        habit.toggleCompletion(daysAgo: daysAgo)
+        dataController.save()
     }
 }
 
