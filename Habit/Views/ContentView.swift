@@ -56,6 +56,7 @@ struct ContentView_Previews: PreviewProvider {
             .environment(\.managedObjectContext, DataController.preview.container.viewContext)
             .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
             .previewDisplayName("iPhone 14 Pro Max")
+            .environment(\.locale, .init(identifier: "uk"))
         
         ContentView()
             .environment(\.managedObjectContext, DataController.preview.container.viewContext)

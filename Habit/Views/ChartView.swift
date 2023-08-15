@@ -12,6 +12,10 @@ struct ChartView: View {
         var id: Self { self }
         case sixMonths = "Six months"
         case oneYear = "One year"
+        
+        func localizedString() -> LocalizedStringKey {
+            LocalizedStringKey(self.rawValue)
+        }
     }
     
     // TODO: make it a Binding
@@ -34,7 +38,7 @@ struct ChartView: View {
                 Spacer()
                 Picker("Display mode", selection: $displayMode) {
                     ForEach(DisplayModes.allCases) {
-                        Text($0.rawValue)
+                        Text($0.localizedString())
                     }
                 }
                 .offset(x: 12)

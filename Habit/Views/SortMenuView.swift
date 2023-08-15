@@ -11,6 +11,10 @@ enum SortingOption: String, CaseIterable, Identifiable {
     var id: Self { self }
     case byDate = "Sort by Date"
     case byName = "Sort by Name"
+    
+    func localizedString() -> LocalizedStringKey {
+        LocalizedStringKey(self.rawValue)
+    }
 }
 
 struct SortMenuView: View {
@@ -37,10 +41,10 @@ struct SortMenuView: View {
     
     var body: some View {
         Menu {
-            Picker("Picker", selection: sorting) {
+            Picker("Sorting", selection: sorting) {
                 ForEach(SortingOption.allCases) { sortingOption in
                     HStack {
-                        Text(sortingOption.rawValue)
+                        Text(sortingOption.localizedString())
                         if selectedSortingOption == sortingOption {
                             Image(systemName: isSortingOrderAscending ? "chevron.up" : "chevron.down")
                         }

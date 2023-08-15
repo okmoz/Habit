@@ -40,7 +40,7 @@ struct HeaderView: View {
         let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
         
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US")
+//        dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = "EEEEEE"
         let dayName = dateFormatter.string(from: todayMinusDaysAgo)
         

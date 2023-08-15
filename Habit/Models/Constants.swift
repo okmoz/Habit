@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum Constants {    
-    static let motivationPrompts = [
+    static let motivationPrompts: [LocalizedStringKey] = [
          "Keep it Up! 🙌",
          "🙏 Feel the force of the Habit",
          "❤️ You are amazing!",
