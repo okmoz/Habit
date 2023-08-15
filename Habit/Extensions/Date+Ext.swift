@@ -7,14 +7,6 @@
 
 import Foundation
 
-
-extension Date {
-    /// Returns the amount of days from another date
-    func days(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
-    }
-}
-
 // Source: https://stackoverflow.com/a/33397770
 extension Date {
     static func today() -> Date {
@@ -92,11 +84,17 @@ extension Date {
 }
 
 extension Date {
+    /// Returns the amount of days from another date
+    func days(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+    }
+}
+
+extension Date {
     func isInSameDay(as date: Date) -> Bool {
         Calendar.current.isDate(self, inSameDayAs: date)
     }
 }
-
 
 extension [Date] {
     var asDateComponents: [DateComponents] {
@@ -105,6 +103,14 @@ extension [Date] {
             dateComponents.timeZone = TimeZone.current
             dateComponents.calendar = Calendar(identifier: .gregorian)
             return dateComponents
+        }
+    }
+}
+
+extension [DateComponents] {
+    var asDates: [Date] {
+        self.compactMap { dateComponents in
+            dateComponents.date
         }
     }
 }
@@ -119,10 +125,4 @@ extension DateComponents {
     }
 }
 
-extension [DateComponents] {
-    var asDates: [Date] {
-        self.compactMap { dateComponents in
-            dateComponents.date
-        }
-    }
-}
+

@@ -83,7 +83,7 @@ extension Habit {
     ///
     /// - Note: This example habit is created in an in-memory managed object context and is not persisted to disk. It serves as a placeholder or template for displaying sample data.
     static var example: Habit {
-        let dataController = DataController(inMemory: true)
+        let dataController = DataController.preview
         let viewContext = dataController.container.viewContext
         
         let habit = Habit(context: viewContext, title: "Example Habit", motivation: "Motivation text", color: HabitColor.randomColor)

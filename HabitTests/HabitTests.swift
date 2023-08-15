@@ -1,22 +1,31 @@
 //
-//  HabitTests.swift
+//  HabitItemTests.swift
 //  HabitTests
 //
-//  Created by Nazarii Zomko on 23.05.2023.
+//  Created by Nazarii Zomko on 26.05.2023.
 //
 
 import CoreData
 import XCTest
-// import all of the Habit target but make it testable and available for us to read all the classes and structs without having to mark them as public
 @testable import Habit
 
-// this will be used for all our future tests
-class BaseTestCase: XCTestCase {
-    var dataController: DataController!
-    var managedObjectContext: NSManagedObjectContext!
+class HabitTests: BaseTestCase {
+    func testHabitCreation() {
+        let targetCount = 10
+        
+        for _ in 0..<targetCount {
+            let _ = Habit(context: managedObjectContext)
+        }
+        
+        XCTAssertEqual(try? managedObjectContext.count(for: Habit.fetchRequest()), targetCount)
+    }
     
-    override func setUpWithError() throws {
-        dataController = DataController(inMemory: true)
-        managedObjectContext = dataController.container.viewContext
+    func testHabitDeletionWorks() throws {
+        try dataController.createSampleData()
+        let habits = try self.managedObjectContext.fetch(Habit.fetchRequest())
+        
+        dataController.delete(habits[0])
+        
+        XCTAssertEqual(try managedObjectContext.count(for: Habit.fetchRequest()), 9)
     }
 }
