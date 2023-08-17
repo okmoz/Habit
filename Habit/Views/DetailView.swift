@@ -33,7 +33,7 @@ struct DetailView: View {
                 overview
                 ChartView(dates: habit.completedDates, color: habit.color)
                     .padding([.horizontal, .bottom])
-                CalendarView(dateInterval: .init(start: .distantPast, end: .today()), completedDates: completedDates, color: habit.color)
+                CalendarView(dateInterval: .init(start: .distantPast, end: Date.now), completedDates: completedDates, color: habit.color)
             }
             .navigationTitle("\(habit.title)")
             .toolbarBackground(Color(habit.color), for: .navigationBar)

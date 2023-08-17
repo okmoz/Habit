@@ -7,12 +7,43 @@
 
 import Foundation
 
-// Source: https://stackoverflow.com/a/33397770
+
 extension Date {
-    static func today() -> Date {
-        return Date()
+    func isInSameDay(as date: Date) -> Bool {
+        Calendar.current.isDate(self, inSameDayAs: date)
     }
     
+    static func todayMinusDaysAgo(daysAgo: Int) -> Date {
+        let today = Date.now
+        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
+        return todayMinusDaysAgo
+    }
+    
+    func isWithinLastDays(daysAgo: Int) -> Bool {
+        let daysAgoDate = Date.todayMinusDaysAgo(daysAgo: daysAgo)
+        if self.isInSameDay(as: daysAgoDate) { return true }
+        return self >= daysAgoDate && self <= Date.now
+    }
+    
+    // For previewing purposes only.
+    static func getRandomDates(maxDaysBack: Int, chanceFrom0To100: Int = 60) -> [Date] {
+        var dates: [Date] = []
+        let today = Date.now
+        
+        for daysBack in 0..<maxDaysBack {
+            let shouldAddDate = Int.random(in: 1...100) <= chanceFrom0To100 // returns true with a chance of ..%
+            
+            if shouldAddDate {
+                let todayMinusDaysBack = Calendar.current.date(byAdding: .day, value: -daysBack, to: today)!
+                dates.append(todayMinusDaysBack)
+            }
+        }
+        return dates
+    }
+}
+
+// Source: https://stackoverflow.com/a/33397770
+extension Date {
     func next(_ weekday: Weekday, considerToday: Bool = false) -> Date {
         return get(.next,
                    weekday,
@@ -90,13 +121,25 @@ extension Date {
     }
 }
 
-extension Date {
-    func isInSameDay(as date: Date) -> Bool {
-        Calendar.current.isDate(self, inSameDayAs: date)
-    }
-}
 
 extension [Date] {
+    func removingDuplicates() -> [Date] {
+        var uniqueDates: [Date] = []
+        var uniqueDateSet: Set<String> = []
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        for date in self {
+            let dateString = dateFormatter.string(from: date)
+            if !uniqueDateSet.contains(dateString) {
+                uniqueDateSet.insert(dateString)
+                uniqueDates.append(date)
+            }
+        }
+
+        return uniqueDates
+    }
+    
     var asDateComponents: [DateComponents] {
         self.map { date in
             var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)

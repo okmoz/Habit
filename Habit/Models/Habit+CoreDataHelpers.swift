@@ -87,7 +87,7 @@ extension Habit {
         let viewContext = dataController.container.viewContext
         
         let habit = Habit(context: viewContext, title: "Example Habit", motivation: "Motivation text", color: HabitColor.randomColor)
-        habit.completedDates_ = Constants.getRandomDates(maxDaysBack: 7*26)
+        habit.completedDates_ = Date.getRandomDates(maxDaysBack: 7*26)
         
         do {
             try viewContext.save()

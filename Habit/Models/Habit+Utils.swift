@@ -8,23 +8,26 @@
 import Foundation
 
 extension Habit {
+    // The number of days to look back when calculating the habit's strength percentage, aiming for 100%.
+    // This value defines the time period within which completed dates are considered for strength calculation.
+    var strengthCalculationPeriod: Int { 60 }
+    
     var strengthPercentage: Int {
-        getStrengthPercentage(completedDates: completedDates)
+        calculateStrengthPercentage(completedDates: completedDates)
     }
     
     var streak: Int {
-        let dates = completedDates.map { Calendar.current.startOfDay(for: $0) }
-        // Sort from newest to oldest
-        let sortedDates = dates.sorted { $0 > $1 }
-        // Check if there are any completed dates as well as get a non-optional firstDate
-        guard let firstDate = sortedDates.first else { return 0 }
+        let dates = processDatesForStreakCalculation(completedDates)
+        // Check if there are any completed dates
+        guard let firstDate = dates.first else { return 0 }
         // If the most recent completion date is not today, there's no current streak
         guard firstDate.isInSameDay(as: Date()) else { return 0 }
+        
         var previousDate = firstDate
         
         var streak = 1
 
-        for date in sortedDates.dropFirst() {
+        for date in dates.dropFirst() {
             let daysBetweenDates = previousDate.days(from: date)
             if daysBetweenDates <= 1 {
                 streak += 1
@@ -37,15 +40,16 @@ extension Habit {
     }
     
     var longestStreak: Int {
-        let dates = completedDates.map { Calendar.current.startOfDay(for: $0) }
-        let sortedDates = dates.sorted { $0 > $1 }
-        guard let firstDate = sortedDates.first else { return 0 }
-        var previousDate = firstDate
+        let dates = processDatesForStreakCalculation(completedDates)
+        // Check if there are any completed dates
+        guard let firstDate = dates.first else { return 0 }
         
+        var previousDate = firstDate
+
         var currentStreak = 1
         var longestStreak = 0
-        
-        for date in sortedDates.dropFirst() {
+         
+        for date in dates.dropFirst() {
             let daysBetweenDates = previousDate.days(from: date)
             if daysBetweenDates <= 1 {
                 currentStreak += 1
@@ -60,11 +64,15 @@ extension Habit {
         return max(currentStreak, longestStreak)
     }
     
-    
-    func todayMinusDaysAgo(daysAgo: Int) -> Date {
-        let today = Date.now
-        let todayMinusDaysAgo = Calendar.current.date(byAdding: .day, value: -daysAgo, to: today)!
-        return todayMinusDaysAgo
+    func processDatesForStreakCalculation(_ dates: [Date]) -> [Date] {
+        let dates = dates.map { Calendar.current.startOfDay(for: $0) }
+        // Filter dates without days after today
+        let datesWithoutDaysAfterToday = dates.filter { $0 <= Date.now }
+        // Remove duplicates
+        let uniqueDatesWithinPeriod = datesWithoutDaysAfterToday.removingDuplicates()
+        // Sort from newest to oldest
+        let sortedDates = uniqueDatesWithinPeriod.sorted { $0 > $1 }
+        return sortedDates
     }
 
     func isCompleted(for date: Date) -> Bool {
@@ -72,7 +80,7 @@ extension Habit {
     }
     
     func isCompleted(daysAgo: Int) -> Bool {
-        isCompleted(for: todayMinusDaysAgo(daysAgo: daysAgo))
+        isCompleted(for: Date.todayMinusDaysAgo(daysAgo: daysAgo))
     }
     
     /// Adds a date to the list of completed dates for the habit.
@@ -92,37 +100,43 @@ extension Habit {
     }
     
     func toggleCompletion(daysAgo: Int) {
-        let todayMinusDaysAgo = todayMinusDaysAgo(daysAgo: daysAgo)
+        let todayMinusDaysAgo = Date.todayMinusDaysAgo(daysAgo: daysAgo)
         self.isCompleted(daysAgo: daysAgo) ? self.removeCompletedDate(todayMinusDaysAgo) : self.addCompletedDate(todayMinusDaysAgo)
     }
     
+    
+    // TODO: Calculate percentage from 0 to 1 instead of 0 to 100
     /// The strength percentage of the habit.
     ///
     /// Represents the strength percentage of the habit based on the number of completed dates. The calculation is performed using a logarithmic formula.
     /// - Returns: An integer representing the strength percentage of the habit, ranging from 0 to 100.
-    func getStrengthPercentage(completedDates: [Date]) -> Int {
-        // Get completed dates within the last 70 days
-        let completedDatesWithinLast70Days = completedDates.filter { Constants.isDateWithinLastDays(date: $0, daysAgo: 70) }
+    func calculateStrengthPercentage(completedDates: [Date]) -> Int {
+        // Get completed dates within the specified number of days counting back from today.
+        let completedDatesWithinPeriod = completedDates.filter { $0.isWithinLastDays(daysAgo: strengthCalculationPeriod) }
+        let uniqueCompletedDatesWithinPeriod = completedDatesWithinPeriod.removingDuplicates()
         
         // Calculate the strength percentage using a logarithmic formula
-        let logNumber = Double(completedDatesWithinLast70Days.count + 1)
-        // TODO: Calculate percentage from 0 to 1 instead of 0 to 100
-        let logBase = 1.04340035560572 // With this log base, 100% will be reached in 69 days.
-        let calculatedPercentage = Int(log(logNumber)/log(logBase))
+        let logNumber = Double(uniqueCompletedDatesWithinPeriod.count + 1)
+        let logBase = calculateLogarithmBase(value: Double(strengthCalculationPeriod), result: 100) // With this log base, 100% strength will be reached in 'strengthCalculationPeriod' days.
         
+        let calculatedPercentage = Int(log(logNumber)/log(logBase))
         // Ensure the calculated percentage is within the range of 0 to 100
         return min(calculatedPercentage, 100)
     }
     
+    func calculateLogarithmBase(value: Double, result: Double) -> Double {
+        return pow(value, 1/result)
+    }
+    
     func strengthGainedWithinLastDays(daysAgo: Int) -> Int {
-        let habitStrength = getStrengthPercentage(completedDates: completedDates)
-        let completedDatesWithoutLast30Days = completedDates.filter { Constants.isDateWithinLastDays(date: $0, daysAgo: daysAgo) == false }
-        let habitStrengthWithoutLast30Days = getStrengthPercentage(completedDates: completedDatesWithoutLast30Days)
+        let habitStrength = calculateStrengthPercentage(completedDates: completedDates)
+        let completedDatesWithoutLast30Days = completedDates.filter { $0.isWithinLastDays(daysAgo: daysAgo) == false }
+        let habitStrengthWithoutLast30Days = calculateStrengthPercentage(completedDates: completedDatesWithoutLast30Days)
         let strengthGainedInMonth = habitStrength - habitStrengthWithoutLast30Days
         return strengthGainedInMonth
     }
     
     func completionsWithinLastDays(daysAgo: Int) -> Int {
-        completedDates.filter { Constants.isDateWithinLastDays(date: $0, daysAgo: daysAgo) }.count
+        completedDates.filter { $0.isWithinLastDays(daysAgo: daysAgo) }.count
     }
 }

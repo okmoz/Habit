@@ -103,7 +103,7 @@ struct ChartView: View {
         // If number of rows is less than 7 (like 7 days of the week), shifting days would not make sense because columns would not be comprised of weeks.
         guard rows == 7 else { return 0 }
         
-        let today = Date.today()
+        let today = Date.now
         let nextSunday = today.next(.sunday)
         let offset = nextSunday.days(from: today)
         
