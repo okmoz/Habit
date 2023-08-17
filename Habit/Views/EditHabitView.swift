@@ -82,6 +82,7 @@ struct EditHabitView: View {
                 .foregroundColor(.black)
                 .focused($isNameTextFieldFocused)
                 .padding(.horizontal)
+                .accessibilityIdentifier("nameTextField")
         }
         .padding(.top, 40)
         .padding(.bottom, 15)
@@ -130,6 +131,7 @@ struct EditHabitView: View {
                 dismiss()
             }
             .foregroundColor(.black)
+            .accessibilityIdentifier("saveHabit")
         }
     }
     
@@ -142,6 +144,7 @@ struct EditHabitView: View {
                 Text("Delete Habit")
                     .foregroundColor(.red)
             }
+            .accessibilityIdentifier("deleteHabit")
         }
     }
     

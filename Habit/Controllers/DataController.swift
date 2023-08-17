@@ -49,13 +49,12 @@ class DataController: ObservableObject {
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            
-//            #if DEBUG
-//            if CommandLine.arguments.contains("enable-testing") {
-//                self.deleteAll()
-//                UIView.setAnimationsEnabled(false)
-//            }
-//            #endif
+            #if DEBUG
+            if CommandLine.arguments.contains("enable-testing") {
+                self.deleteAll()
+                UIView.setAnimationsEnabled(false)
+            }
+            #endif
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }

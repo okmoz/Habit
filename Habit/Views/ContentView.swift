@@ -20,7 +20,7 @@ struct ContentView: View {
                 HabitListView(sortingOption: sortingOption, isSortingOrderAscending: isSortingOrderAscending)
             }
             .toolbar {
-                editHabitToolbarItem
+                addHabitToolbarItem
                 sortMenuToolbarItem
             }
             .sheet(isPresented: $isPresentingEditHabitView) {
@@ -29,7 +29,7 @@ struct ContentView: View {
         }
     }
     
-    var editHabitToolbarItem: some ToolbarContent {
+    var addHabitToolbarItem: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
                 isPresentingEditHabitView = true
@@ -39,6 +39,7 @@ struct ContentView: View {
                     .tint(.primary)
             }
             .accessibilityLabel("Add Habit")
+            .accessibilityIdentifier("addHabit")
         }
     }
     

@@ -46,6 +46,7 @@ struct DetailView: View {
                         EditHabitView(habit: habit)
                     }
                     .foregroundColor(.black)
+                    .accessibilityIdentifier("editHabit")
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Close") {

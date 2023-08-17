@@ -11,15 +11,15 @@ struct ColorsPickerView: View {
     let colors = HabitColor.allCases
     
     @Environment(\.dismiss) private var dismiss
-
+    
     @Binding var selectedColor: HabitColor
-
+    
     let gridItemLayout = [
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
-
+    
     var body: some View {
         LazyVGrid(columns: gridItemLayout) {
             ForEach(colors) { color in
@@ -41,11 +41,11 @@ struct ColorsPickerView: View {
                         }
                 }
                 .aspectRatio(1, contentMode: .fit)
-//                .background(.pink)
+                //                .background(.pink)
             }
         }
         .padding()
-//        .border(.cyan)
+        //        .border(.cyan)
     }
 }
 
@@ -55,7 +55,7 @@ struct ColorsPickerView_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
         
         ColorsPickerView(selectedColor: .constant(.blue))
-                    .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
-                    .previewDisplayName("iPhone 14 Pro Max")
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+            .previewDisplayName("iPhone 14 Pro Max")
     }
 }

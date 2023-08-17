@@ -104,5 +104,3 @@ final class HabitUtilsTests: BaseTestCase {
         XCTAssertEqual(habit.longestStreak, 4, "Streak should be 4 because the longer streak of days is 4.")
     }
 }
-
-

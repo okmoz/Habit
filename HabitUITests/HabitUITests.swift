@@ -9,19 +9,29 @@ import XCTest
 
 // TODO: Do not include UI tests because they are riddled with bugs. Also they are slow to run. It even crashes Xcode sometimes lol
 final class HabitUITests: XCTestCase {
-    var app: XCUIApplication!
+    private var app: XCUIApplication!
 
-    override func setUpWithError() throws {
+    override func setUp() {
         continueAfterFailure = false
-        
         app = XCUIApplication()
-        app.launchArguments = ["enable-testing"] // N: This does not mean anything, we just created it ourselves to use it later in DataController for debug mode.
-        app.launchArguments = ["-AppleLanguages", "(en-US)"] // Set English localization
+        app.launchArguments = ["enable-testing"]
         app.launch()
     }
-
-    func testAppHasZeroTabs() throws {
-        // TODO: I should probably remove this because it is useless.
-        XCTAssertEqual(app.tabBars.buttons.count, 0, "There should be 0 tabs in the app.")
+    
+    func testAddingAndDeletingHabit() {
+        let habitText = app.staticTexts["Habit"]
+        XCTAssert(habitText.exists, "There should be a 'Habit' text above the list in the HeaderView.")
+        
+        app.buttons["addHabit"].tap()
+        let nameTextField = app.textFields["nameTextField"]
+        nameTextField.tap()
+        nameTextField.typeText("test")
+        app.buttons["saveHabit"].tap()
+        XCTAssertTrue(app.staticTexts["test"].exists, "There should be 1 habit in list with a title 'test'.")
+        
+        app.staticTexts["test"].tap()
+        app.buttons["editHabit"].tap()
+        app.buttons["deleteHabit"].tap()
+        XCTAssertFalse(app.staticTexts["test_habit_name"].exists, "There should be 0 habits in list.")
     }
 }
