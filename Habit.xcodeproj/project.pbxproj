@@ -69,6 +69,7 @@
 		02089EBC2A626390003DB055 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 		02089EC82A66D4A1003DB055 /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		020A5DAF2A4887100062C283 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		0220B20B2A97900200C29248 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0224D8D62A1614B90067B559 /* ColorsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerView.swift; sourceTree = "<group>"; };
 		0224D8D82A1796490067B559 /* EditHabitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditHabitView.swift; sourceTree = "<group>"; };
 		0224D8DA2A17D6FF0067B559 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 		02C3A87B2A0FBA780044D090 = {
 			isa = PBXGroup;
 			children = (
+				0220B20B2A97900200C29248 /* README.md */,
 				02C3A8A92A1261630044D090 /* TODO.md */,
 				02C3A8A22A1220A90044D090 /* Notes (Paul Hudson).md */,
 				0259820E2A2A16E80085D29E /* Notes (Sean Allen).md */,
