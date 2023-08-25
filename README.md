@@ -4,6 +4,18 @@
 
 Habit is a user-friendly habit tracking app designed to help users build positive habits and track their progress over time. The app is built using Swift and SwiftUI, making use of CoreData for data persistence, AppIntents for Siri integration, and includes features for localization and accessibility. 
 
+  <img src="https://github.com/okmoz/Habit/assets/64868381/575db34b-1bf2-4e64-8a09-d420c180feb1" alt="iPhone 14 Pro mockup_3" width="300">
+
+
+https://github.com/okmoz/Habit/assets/64868381/820eb73f-1f6d-4d25-83fb-d26f1361895e
+
+
+ <img src="https://github.com/okmoz/Habit/assets/64868381/7e05b77b-be2e-4099-be67-41508c9f83e7" alt="iPhone 14 Pro mockup_3" width="300">
+  <img src="https://github.com/okmoz/Habit/assets/64868381/c93c3e3c-f9f1-44b7-a1f1-b826175f6370" alt="iPhone 14 Pro mockup_3" width="300">
+
+
+
+
 Design ~~stolen~~ inspired by https://apps.apple.com/us/app/habit-daily-tracker/id1445651730
 
 ## Features
