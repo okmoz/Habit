@@ -4,19 +4,11 @@
 
 Habit is a user-friendly habit tracking app designed to help users build positive habits and track their progress over time. The app is built using Swift and SwiftUI, making use of CoreData for data persistence, AppIntents for Siri integration, and includes features for localization and accessibility. 
 
-  <img src="https://github.com/okmoz/Habit/assets/64868381/575db34b-1bf2-4e64-8a09-d420c180feb1" alt="iPhone 14 Pro mockup_3" width="300">
 
-
-https://github.com/okmoz/Habit/assets/64868381/820eb73f-1f6d-4d25-83fb-d26f1361895e
-
-
- <img src="https://github.com/okmoz/Habit/assets/64868381/7e05b77b-be2e-4099-be67-41508c9f83e7" alt="iPhone 14 Pro mockup_3" width="300">
-  <img src="https://github.com/okmoz/Habit/assets/64868381/c93c3e3c-f9f1-44b7-a1f1-b826175f6370" alt="iPhone 14 Pro mockup_3" width="300">
-
-
-
-
-Design ~~stolen~~ inspired by https://apps.apple.com/us/app/habit-daily-tracker/id1445651730
+|Adding|Sorting|Completing|Details|
+|:-:|:-:|:-:|:-:|
+|<img src="https://github.com/okmoz/Habit/assets/64868381/a1c21f96-6c5b-42ab-9362-7237660b9367" width=200>|<img src="https://github.com/okmoz/Habit/assets/64868381/5440e482-3778-4aa0-8cc5-d999bdc227d9" width=200>|<img src="https://github.com/okmoz/Habit/assets/64868381/1f6b4837-f993-470c-b899-9a75df660cd2" width=200>|<img src="https://github.com/okmoz/Habit/assets/64868381/f391dee7-13a2-4b98-b577-eb5ac838022c" width=200>|
+  
 
 ## Features
 
@@ -44,6 +36,10 @@ git clone https://github.com/okmoz/Habit.git
 ```
 2. Open the project in Xcode.
 3. Build and run the app on the iOS simulator or a physical device running iOS 16.0 or later.
+
+## Attributions
+
+Design inspired by https://apps.apple.com/us/app/habit-daily-tracker/id1445651730
 
 ## License
 Habit is released under the MIT License.
