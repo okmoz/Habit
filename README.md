@@ -37,7 +37,7 @@ git clone https://github.com/okmoz/Habit.git
 2. Open the project in Xcode.
 3. Build and run the app on the iOS simulator or a physical device running iOS 16.0 or later.
 
-## Attributions
+## Credits
 
 Design inspired by https://apps.apple.com/us/app/habit-daily-tracker/id1445651730
 
