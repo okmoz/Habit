@@ -7,7 +7,7 @@ Habit is a user-friendly habit tracking app designed to help users build positiv
 
 |Adding|Sorting|Completing|Details|
 |:-:|:-:|:-:|:-:|
-|<img src="https://github.com/okmoz/Habit/assets/64868381/a1c21f96-6c5b-42ab-9362-7237660b9367" width=200>|<img src="https://github.com/okmoz/Habit/assets/64868381/5440e482-3778-4aa0-8cc5-d999bdc227d9" width=200>|<img src="https://github.com/okmoz/Habit/assets/64868381/1f6b4837-f993-470c-b899-9a75df660cd2" width=200>|<img src="https://github.com/okmoz/Habit/assets/64868381/f391dee7-13a2-4b98-b577-eb5ac838022c" width=200>|
+|<img src="https://github.com/okmoz/Habit/assets/64868381/4b9f67ba-abc3-4ca3-b2ef-62043cf0f940" width=200>|<img src="https://github.com/okmoz/Habit/assets/64868381/92a87ad6-b940-49f2-9b66-ca4e09609268" width=200>|<img src="https://github.com/okmoz/Habit/assets/64868381/6d6ad74d-f0ba-44a6-96dd-a2d7c0e96b6a" width=200>|<img src="https://github.com/okmoz/Habit/assets/64868381/d83f39f0-6d71-471a-8a74-5a7ececa3dee" width=200>|
   
 
 ## Features
